@@ -1,0 +1,69 @@
+<style type="text/scss">
+  @mixin border-stroke($val) {
+    @if $val == light {
+      border: 1px solid black;
+    } @else if $val == medium {
+      border: 3px solid black;
+    } @else if $val == heavy {
+      border: 6px solid black;
+    } @else {
+      border: none;
+    }
+  }
+  
+  #box {
+    width: 150px;
+    height: 150px;
+    background-color: red;
+    @include border-stroke(medium);
+  }
+
+  @each $color in blue, black, red {
+.#{$color}-bg {background-color: $color}
+}
+  .div {
+    height: 200px;
+    width: 200px;
+  }
+
+  /* $t: 1;
+@while $t < 6 {
+.text-#{$t} {font-size: 15px * $t;}
+$t: $t + 1;
+} */
+
+h3{
+    text-align: center;
+  }
+  .info{
+    width: 200px;
+    border: 1px solid black;
+    margin: 0 auto;
+  }
+  .info-important {
+    @extend .info;
+    background-color: magenta;
+  }
+
+</style>
+
+<div id="box"></div>
+
+<div class="div blue-bg"></div>
+<div class="div black-bg"></div>
+<div class="div red-bg"></div>
+
+<p class="text-1">Hello</p>
+<p class="text-2">Hello</p>
+<p class="text-3">Hello</p>
+<p class="text-4">Hello</p>
+<p class="text-5">Hello</p>
+
+<h3>Posts</h3>
+<div class="info-important">
+  <p>This is an important post. It should extend the class ".info" and have its own CSS styles.</p>
+</div>
+
+<div class="info">
+  <p>This is a simple post. It has basic styling and can be extended for other uses.</p>
+</div>

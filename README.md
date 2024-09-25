@@ -22,8 +22,8 @@ Later, you'll build a shopping cart and other applications to learn how to creat
 ## <br /> <a name="courses">🛠 Courses</a>
 
 - [x] [Bootstrap](#bootstrap)
-- [  ] [JQuery](#JQuery) in progress
-- [ ] [Sass](#Sass)
+- [x] [JQuery](#JQuery) 
+- [x] [Sass](#Sass) 
 - [ ] [React](#React)
 - [ ] [Redux](#Redux)
 - [ ] [React_and_Redux](#React_and_Redux)
@@ -47,6 +47,11 @@ Later, you'll build a shopping cart and other applications to learn how to creat
 > In this course, I learn how to use jQuery to select, remove, clone, and modify different elements on the page.
 
 ### <br /> <a name="Sass">Sass</a>
+
+> Sass, or "Syntactically Awesome StyleSheets", is a language extension of CSS. It adds features that aren't available in basic CSS, which make it easier for you to simplify and maintain the style sheets for your projects.
+
+> [!NOTE]
+> In this Sass course, I learn how to store data in variables, nest CSS, create reusable styles with mixins, add logic and loops to your styles, and more.
 
 ### <br /> <a name="React">React</a>
 
