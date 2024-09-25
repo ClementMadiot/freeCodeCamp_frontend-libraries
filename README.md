@@ -21,8 +21,8 @@ Later, you'll build a shopping cart and other applications to learn how to creat
 
 ## <br /> <a name="courses">🛠 Courses</a>
 
-- [  ] [Bootstrap](#bootstrap)
-- [  ] [JQuery](#JQuery)
+- [x] [Bootstrap](#bootstrap)
+- [  ] [JQuery](#JQuery) in progress
 - [ ] [Sass](#Sass)
 - [ ] [React](#React)
 - [ ] [Redux](#Redux)
@@ -34,9 +34,17 @@ Later, you'll build a shopping cart and other applications to learn how to creat
 
 > Bootstrap is a front end framework used to design responsive web pages and applications. It takes a mobile-first approach to web development, and includes pre-built CSS styles and classes, plus some JavaScript functionality.
 
-> In this course, you'll learn how to build responsive websites with Bootstrap, and use its included classes to style buttons, images, forms, navigation, and other common elements.
+> [!NOTE]
+> In this course, I learn how to build responsive websites with Bootstrap, and use its included classes to style buttons, images, forms, navigation, and other common elements.
 
 ### <br /> <a name="JQuery">JQuery</a>
+
+> jQuery is one of the most widely used JavaScript libraries in the world.
+
+> In 2006 when it was released, all major browsers handled JavaScript slightly differently. jQuery simplified the process of writing client-side JavaScript, and also ensured that your code worked the same way in all browsers.
+
+> [!NOTE]
+> In this course, I learn how to use jQuery to select, remove, clone, and modify different elements on the page.
 
 ### <br /> <a name="Sass">Sass</a>
 
