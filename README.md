@@ -8,8 +8,7 @@
 ## <br /> 📋 <a name="table">Summary</a>
 
 - ✨ [Introduction](#introduction)
-- 🛠 [Courses](#courses)
-- 🚀 [Launch App](#launch-app)
+- 📚 [Courses](#courses)
 
 ## <br /> <a name="introduction">✨ Introduction</a>
 
@@ -17,9 +16,9 @@ Now that you're familiar with HTML, CSS, and JavaScript, level up your skills by
 
 In the Front End Development Libraries Certification, you'll learn how to style your site quickly with Bootstrap. You'll also learn how to add logic to your CSS styles and extend them with Sass.
 
-Later, you'll build a shopping cart and other applications to learn how to create powerful Single Page Applications (SPAs) with React and Redux.
+Later, I'll build a shopping cart and other applications to learn how to create powerful Single Page Applications (SPAs) with React and Redux.
 
-## <br /> <a name="courses">🛠 Courses</a>
+## <br /> <a name="courses">📚 Courses</a>
 
 - [x] [Bootstrap](#bootstrap)
 - [x] [JQuery](#JQuery) 
@@ -54,6 +53,12 @@ Later, you'll build a shopping cart and other applications to learn how to creat
 > In this Sass course, I learn how to store data in variables, nest CSS, create reusable styles with mixins, add logic and loops to your styles, and more.
 
 ### <br /> <a name="React">React</a>
+
+> React is a popular JavaScript library for building reusable, component-driven user interfaces for web pages or applications.
+
+> React combines HTML with JavaScript functionality into its own markup language called JSX. React also makes it easy to manage the flow of data throughout the application.
+
+> [!NOTE] In this course, I learn how to create different React components, manage data in the form of state props, use different lifecycle methods like componentDidMount, and much more.
 
 ### <br /> <a name="Redux">Redux</a>
 
