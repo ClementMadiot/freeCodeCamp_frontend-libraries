@@ -23,7 +23,7 @@ Later, I'll build a shopping cart and other applications to learn how to create 
 - [x] [Bootstrap](#bootstrap)
 - [x] [JQuery](#JQuery) 
 - [x] [Sass](#Sass) 
-- [ ] [React](#React)
+- [x] [React](#React)
 - [ ] [Redux](#Redux)
 - [ ] [React_and_Redux](#React_and_Redux)
 - [ ] [Front_End_Development_Libraries_Projects](#Front_End_Development_Libraries_Projects)
