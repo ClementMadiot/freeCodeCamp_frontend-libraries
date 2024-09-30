@@ -58,9 +58,17 @@ Later, I'll build a shopping cart and other applications to learn how to create 
 
 > React combines HTML with JavaScript functionality into its own markup language called JSX. React also makes it easy to manage the flow of data throughout the application.
 
-> [!NOTE] In this course, I learn how to create different React components, manage data in the form of state props, use different lifecycle methods like componentDidMount, and much more.
+> [!NOTE] 
+> In this course, I learn how to create different React components, manage data in the form of state props, use different lifecycle methods like componentDidMount, and much more.
 
 ### <br /> <a name="Redux">Redux</a>
+
+> As applications grow in size and scope, managing shared data becomes much more difficult. Redux is defined as a "predictable state container for JavaScript apps" that helps ensure your apps work predictably, and are easier to test.
+
+> While you can use Redux with any view library, we introduce Redux here before combining it with React in the next set of courses.
+
+> [!NOTE] 
+>In this course, I learn the fundamentals of Redux stores, actions, reducers and middleware to manage data throughout your application.
 
 ### <br /> <a name="React_and_Redux">React and Redux</a>
 
