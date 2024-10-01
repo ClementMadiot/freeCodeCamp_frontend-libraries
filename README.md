@@ -24,8 +24,8 @@ Later, I'll build a shopping cart and other applications to learn how to create 
 - [x] [JQuery](#JQuery) 
 - [x] [Sass](#Sass) 
 - [x] [React](#React)
-- [ ] [Redux](#Redux)
-- [ ] [React_and_Redux](#React_and_Redux)
+- [x] [Redux](#Redux)
+- [x] [React_and_Redux](#React_and_Redux)
 - [ ] [Front_End_Development_Libraries_Projects](#Front_End_Development_Libraries_Projects)
 
 
@@ -68,9 +68,14 @@ Later, I'll build a shopping cart and other applications to learn how to create 
 > While you can use Redux with any view library, we introduce Redux here before combining it with React in the next set of courses.
 
 > [!NOTE] 
->In this course, I learn the fundamentals of Redux stores, actions, reducers and middleware to manage data throughout your application.
+> In this course, I learn the fundamentals of Redux stores, actions, reducers and middleware to manage data throughout your application.
 
 ### <br /> <a name="React_and_Redux">React and Redux</a>
+
+> React and Redux are often mentioned together, and with good reason. The developer who created Redux was a React developer who wanted to make it easier to share data across different components.
+
+> [!NOTE] 
+> Now that you know how to manage the flow of shared data with Redux, it's time to combine that knowledge with React. In the React and Redux courses, you'll build a React component and learn how to manage state locally at the component level, and throughout the entire application with Redux.
 
 ### <br /> <a name="Front_End_Development_Libraries_Projects">Front End Development Libraries Projects</a>
 
