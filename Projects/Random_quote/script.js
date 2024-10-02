@@ -38,7 +38,15 @@ const changeColor = () => {
   colorElements.forEach(color => {
     color.style.color = newColors
     color.style.transition = 'background-color 0.5s ease';
+    color.style.opacity = 0
   });
+  setTimeout(() => {
+    colorElements.forEach(color => {
+      color.style.opacity = 1
+      color.style.transition = 'opacity 0.5s ease';
+    });
+
+  }, 500)
 
 }
 
