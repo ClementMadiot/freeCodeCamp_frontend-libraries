@@ -35,13 +35,16 @@ main {
   background-color: white;
   padding: 40px 50px;
   border-radius: 3px;
-  width: 550px;
+  max-width: 550px;
   text-align: center;
 }
 .quote-box .text {
   font-weight: 500;
   font-size: 28px;
   margin: 1rem 0 1rem 1rem;
+}
+.quote-box .text #span-quote {
+  margin-right: 0.5rem;
 }
 .quote-box .author {
   font-weight: 400;
