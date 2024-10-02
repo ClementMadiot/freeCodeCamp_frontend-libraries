@@ -1,0 +1,74 @@
+*,
+::before,
+::after {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+@mixin paragraph($font-weight, $font-size) {
+  font-weight: $font-weight;
+  font-size: $font-size;
+}
+
+@mixin flex($justify-content,$flex-direction) {
+  display: flex;
+  justify-content: $justify-content;
+  align-items: center;
+  flex-direction: $flex-direction;
+}
+
+
+body {
+  background: #fda3a3;
+  font-family: "Raleway", sans-serif;
+}
+a {
+  text-decoration: none;
+  color: whitesmoke;
+  @include paragraph(500, 13px)
+}
+
+main {
+  @include flex(center,column);
+  margin-top: 5rem;
+  padding: 2rem;
+}
+
+.quote-box {
+  @include flex(center,column);
+  background-color: white;
+  padding: 40px 50px;
+  border-radius: 3px;
+  width: 550px;
+  text-align: center;
+
+  .text {
+    @include paragraph(500, 28px);
+    margin: 1rem 0;
+  }
+
+  .author {
+    @include paragraph(400, 16px);
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+  }
+
+  .button-box {
+    @include flex(space-between,row);
+    width: 100%;
+    margin-top: 1.5rem;
+    button {
+      color: whitesmoke;
+      padding: 10px;
+      border: none;
+      @include paragraph(400, 19px)
+    }
+  }
+
+}
+
+.link {
+  margin-top: 1rem;
+}
