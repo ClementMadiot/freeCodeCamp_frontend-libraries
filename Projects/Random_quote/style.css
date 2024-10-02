@@ -14,6 +14,7 @@ body {
 a {
   text-decoration: none;
   color: whitesmoke;
+  cursor: pointer;
   font-weight: 500;
   font-size: 13px;
 }
@@ -62,6 +63,7 @@ main {
   color: whitesmoke;
   padding: 10px;
   border: none;
+  cursor: pointer;
   font-weight: 400;
   font-size: 19px;
 }

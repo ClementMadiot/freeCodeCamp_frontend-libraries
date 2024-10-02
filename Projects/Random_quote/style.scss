@@ -26,6 +26,7 @@ body {
 a {
   text-decoration: none;
   color: whitesmoke;
+  cursor: pointer;
   @include paragraph(500, 13px)
 }
 
@@ -63,6 +64,7 @@ main {
       color: whitesmoke;
       padding: 10px;
       border: none;
+      cursor: pointer;
       @include paragraph(400, 19px)
     }
   }
