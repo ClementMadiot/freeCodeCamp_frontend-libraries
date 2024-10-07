@@ -14,6 +14,7 @@
     radial-gradient(at 33% 50%, hsla(222, 67%, 73%, 1) 0px, transparent 50%),
     radial-gradient(at 79% 53%, hsla(343, 68%, 79%, 1) 0px, transparent 50%);
   --gradient-label: rgb(208, 252, 252);
+  --preview-border: #224b4b;
 }
 
 *,
@@ -45,11 +46,6 @@ body {
 }
 main {
   padding: 1rem 4rem;
-}
-img {
-  width: 100%;
-  max-width: 400px;
-  margin: 1rem;
 }
 
 .grid-background {
@@ -107,7 +103,7 @@ img {
   max-width: 500px;
   margin: 1rem auto 2rem;
   padding: 0 2rem;
-  
+
   textarea {
     width: 100%;
     min-height: 200px;
@@ -142,7 +138,7 @@ img {
     }
   }
   .hidden {
-    display: none
+    display: none;
   }
 }
 
@@ -158,5 +154,60 @@ img {
 
 #preview {
   padding: 1rem 1.5rem;
+  background-color: rgb(216, 246, 241);
+
+  img {
+    display: block;
+    width: 90%;
+    margin: 1.5rem auto;
+  }
+  
+  h1 {
+    font-size: 32px;
+    border-bottom: 2px solid var(--preview-border);
+  }
+  h1,
+  h2,
+  h3 {
+    border-bottom: 2px solid var(--preview-border);
+    margin: 1.5rem 0;
+    line-height: 1.5;
+  }
+
+  code {
+    background-color: white;
+    font-weight: bold;
+    padding: 3px;
+  }
+  p {
+    margin: 1rem 0rem;
+  }
+  pre {
+    display: block;
+    overflow: auto;
+    background: white;
+    padding: 5px;
+    line-height: 1.2;
+  }
+  blockquote {
+    border-left: 3px solid var(--preview-border);
+    color: var(--preview-border);
+    padding-left: 5px;
+    margin-left: 25px;
+  }
+  table {
+    border-collapse: collapse;
+    margin: 1rem 0;
+  }
+   td, th {
+    border: 2px solid var(--preview-border);
+    padding-left: 5px;
+    padding-right: 5px;
+}
+ol {
+  margin: 1rem 0;
 }
 
+
+
+}

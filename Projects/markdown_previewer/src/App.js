@@ -1,6 +1,6 @@
+import { useState } from "react";
 import "./App.scss";
 import ReactMarkdown from "react-markdown";
-import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import remarkGfm from "remark-gfm";
 
 const markdown = `
@@ -10,7 +10,7 @@ const markdown = `
 
 ### And here's some other cool stuff:
         
-        Heres some code, \`<div></div>\`, between 2 backticks.
+Heres some code, \`<div></div>\`, between 2 backticks.
         
 \`\`\`
 // this is multi-line code:
@@ -52,6 +52,7 @@ And here. | Okay. | I think we get it.
 `;
 
 function App() {
+  const [markdownText, setMarkdownText] = useState(markdown)
   return (
     <main>
       <div className="grid-background">
@@ -71,8 +72,8 @@ function App() {
         <textarea
           name="editor"
           id="editor"
-          type="text"
-          defaultValue={markdown}
+          value={markdownText}
+          onChange={(e) => setMarkdownText(e.target.value)}
         ></textarea>
       </article>
 
@@ -88,28 +89,7 @@ function App() {
           </div>
         </div>
         <article id="preview">
-          <ReactMarkdown
-            children={markdown}
-            remarkPlugins={[remarkGfm]}
-            components={{
-              code({ node, inline, className, children, ...props }) {
-                const match = /language-(\w+)/.exec(className || "");
-                return !inline && match ? (
-                  <SyntaxHighlighter
-                    children={String(children).replace(/\n$/, "")}
-                    language={match[1]}
-                    PreTag="div"
-                    {...props}
-                  />
-                ) : (
-                  <code className={className} {...props}>
-                    {children}
-                  </code>
-                );
-              },
-            }}
-          />
-          ,
+          <ReactMarkdown remarkPlugins={[remarkGfm]}>{markdownText}</ReactMarkdown>
         </article>
       </article>
     </main>
