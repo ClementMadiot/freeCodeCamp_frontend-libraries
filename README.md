@@ -8,6 +8,7 @@
 ## <br /> 📋 <a name="table">Summary</a>
 
 - ✨ [Introduction](#introduction)
+- 🌐 [Projects](#projects)
 - 📚 [Courses](#courses)
 
 ## <br /> <a name="introduction">✨ Introduction</a>
@@ -18,6 +19,10 @@ In the Front End Development Libraries Certification, you'll learn how to style 
 
 Later, I'll build a shopping cart and other applications to learn how to create powerful Single Page Applications (SPAs) with React and Redux.
 
+## <br /> <a name="projects">🌐 Projects</a>
+- [x] [random_quotes](./Projects/random_quotes/)
+- [x] [markdown_previewer](./Projects/markdown_previewer/)
+
 ## <br /> <a name="courses">📚 Courses</a>
 
 - [x] [Bootstrap](#bootstrap)
@@ -26,7 +31,6 @@ Later, I'll build a shopping cart and other applications to learn how to create 
 - [x] [React](#React)
 - [x] [Redux](#Redux)
 - [x] [React_and_Redux](#React_and_Redux)
-- [ ] [Front_End_Development_Libraries_Projects](#Front_End_Development_Libraries_Projects)
 
 
 ### <br /> <a name="bootstrap">Bootstrap</a>
@@ -77,5 +81,5 @@ Later, I'll build a shopping cart and other applications to learn how to create 
 > [!NOTE] 
 > Now that you know how to manage the flow of shared data with Redux, it's time to combine that knowledge with React. In the React and Redux courses, you'll build a React component and learn how to manage state locally at the component level, and throughout the entire application with Redux.
 
-### <br /> <a name="Front_End_Development_Libraries_Projects">Front End Development Libraries Projects</a>
+
 

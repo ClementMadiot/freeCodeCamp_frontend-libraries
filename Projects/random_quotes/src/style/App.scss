@@ -66,9 +66,17 @@ main {
     button {
       color: whitesmoke;
       padding: 10px;
+      border-radius: 5px;
       border: none;
       cursor: pointer;
       @include paragraph(400, 19px);
+    }
+  }
+  #reseau {
+    display: flex;
+    gap: 10px;
+    button {
+      padding: 10px 1rem;
     }
   }
 }
