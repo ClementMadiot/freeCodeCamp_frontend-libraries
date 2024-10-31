@@ -98,6 +98,7 @@ Global styling are defined using **SCSS**
 <summary><code>App.scss</code></summary>
 
 ```css
+/* App.scss */
 @import url('https://fonts.googleapis.com/css?family=Raleway:400,500');
 *,
 ::before,
