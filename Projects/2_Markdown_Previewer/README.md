@@ -1,6 +1,6 @@
 <div align="center" class="container">
 <picture>
-  <img alt="FreeCodeCamp" src="https://cdn.freecodecamp.org/platform/universal/fcc_primary.svg">
+  <a href=""><img alt="Markdown-Previewer" src="./public/markdown-web-page.png"></a>
 </picture>
 <h3  align="center">Markdown Previewer</h3>
     <img src="https://img.shields.io/badge/-React_JS-black?style=for-the-badge&logoColor=white&logo=react&color=61DAFB"  alt="react.js" />
