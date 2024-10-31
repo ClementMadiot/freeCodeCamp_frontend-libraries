@@ -90,6 +90,18 @@ yarn install
 
 > Once the dependencies are installed, start the project with the command `npm run dev`.
 
+**Set Up Environment Variables**
+
+Create a new file named `.env` in the root of your project and add the following content:
+
+```env
+VITE_API_KEY= // API KEY
+VITE_API_URL=https://api.api-ninjas.com/v1/quotes
+```
+
+Replace the API KEY with your actual credentials.
+You can obtain these credentials by signing up on the [API Ninjas website](https://api-ninjas.com/).
+
 ## <br /> <a name="style">🎨 Styling</a>
 
 Global styling are defined using **SCSS**
