@@ -1,3 +1,14 @@
+@import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap');
+@import url("https://db.onlinewebfonts.com/c/098f7dc91518834ee5ee7bf8d397954b?family=Digital");
+
+:root {
+  --dark-blue: #2d2d43;
+  --gold: #8c8273;
+  --font-digital: 'Digital';
+  --font-shareTechMono: "Share Tech Mono", monospace;
+  --grey-400: #3a3f41;
+}
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -8,4 +19,27 @@
   padding: 0;
   margin: 0;
   box-sizing: border-box;
+}
+
+body {
+  background: var(--dark-blue);
+  color: #f5f5f5;
+  font-family: var(--font-shareTechMono);
+  font-weight: 400;
+  font-style: normal;
+}
+
+button {
+  height: 65px; 
+  width: 80px;
+  outline: 1px solid var(--gold);
+  font-size: 20px;
+}
+
+button:hover {
+  opacity: 0.9;
+}
+
+button:active {
+  transform: translateY(1px);
 }
