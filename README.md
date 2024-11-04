@@ -20,8 +20,11 @@ In the Front End Development Libraries Certification, you'll learn how to style 
 Later, I'll build a shopping cart and other applications to learn how to create powerful Single Page Applications (SPAs) with React and Redux.
 
 ## <br /> <a name="projects">🌐 Projects</a>
-- [x] [random_quotes](./Projects/random_quotes/)
-- [x] [markdown_previewer](./Projects/markdown_previewer/)
+- [x] [1_Random_Quotes](./Projects/1_Random_Quotes)
+- [x] [2_Markdown_Previewer](./Projects/markdown_previewer)
+- [] [3_Drum_Machine](./Projects/3_Drum_Machine)
+- [] [4_Calculator](./Projects/4_Calculator)
+- [] [5_25_+_5_Clock](./Projects/5_25_+_5_Clock)
 
 ## <br /> <a name="courses">📚 Courses</a>
 
