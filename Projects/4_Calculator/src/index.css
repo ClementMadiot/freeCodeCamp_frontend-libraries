@@ -6,7 +6,7 @@
   --gold: #8c8273;
   --font-digital: 'Digital';
   --font-shareTechMono: "Share Tech Mono", monospace;
-  --grey-400: #3a3f41;
+  --grey-300: #3a3f41;
 }
 
 @tailwind base;
