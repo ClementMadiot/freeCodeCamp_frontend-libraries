@@ -54,6 +54,10 @@ Fourth project FreeCodeCamp to valid the certification "Front End Development Li
 ## <br /> <a name="tech-stack">🛠 Technology Used</a>
 
 - [TailwindCSS](https://tailwindcss.com/docs/installation)
+Tailwind CSS is a valuable tool for developers who want to build modern, responsive, and visually appealing websites without sacrificing development speed.
+
+- [mathjs](https://mathjs.org/)
+Math.js is an extensive math library for JavaScript and Node.js. It features a flexible expression parser with support for symbolic computation, comes with a large set of built-in functions and constants, and offers an integrated solution to work with different data types like numbers, big numbers, complex numbers, fractions, units, and matrices. Powerful and easy to use.
 
 ## <br /> <a name="launch-app">🚀 Launch App</a>
 

@@ -1,9 +1,14 @@
-export interface ButtonDataProps {
+interface ButtonDataProps {
   id: string;
   value: string | number;
   dataKey: number;
   className: string;
 }
+type HandleProps = {
+  handleClick?: (val: string) => void;
+  // handleEqual?: (val: string) => void;
+  handleClear?: () => void;
+};
 
 const buttonData: ButtonDataProps[] = [
   {
@@ -110,5 +115,46 @@ const buttonData: ButtonDataProps[] = [
   },
 ];
 
-export default buttonData
+function Button({ handleClick, handleClear }: HandleProps) {
+  const ClearButton: React.FC<{ handleClear: () => void }> = ({
+    handleClear
+  }) => {
+    return (
+      <>
+        {buttonData.slice(0, 1).map((btn) => (
+          <button 
+            key={btn.id}
+            id={btn.id}
+            className={btn.className}
+            data-key={btn.dataKey}
+            onClick={handleClear}
+          >
+            {btn.value}
+          </button>
+        ))}
+      </>
+    );
+  }
+  // const clearButtonData = buttonData.slice(0, 1);
 
+
+  return (
+    <div id="calculator" className="grid grid-cols-4 grid-rows-5">
+      {handleClear && <ClearButton handleClear={handleClear} />}
+      {buttonData.slice(1, 17).map((btn) => (
+        <button
+          key={btn.id}
+          id={btn.id}
+          className={btn.className}
+          data-key={btn.dataKey}
+          type="button"
+          onClick={() => handleClick && handleClick(String(btn.value))}
+        >
+          {btn.value}
+        </button>
+      ))}
+    </div>
+  );
+}
+
+export default Button;

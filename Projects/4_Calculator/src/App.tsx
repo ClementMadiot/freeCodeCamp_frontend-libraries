@@ -1,47 +1,51 @@
 import { useState } from "react";
+import * as math from "mathjs";
+// import Components
 import Screen from "./components/Screen";
-// import buttonData from "./data/ButtonData.tsx";
-import buttonData from "./data/ButtonData";
+import Button from "./components/Button";
 
 interface ButtonProps {
-  id: string;
-  value: string;
-  dataKey: number;
-  className: string;
+  handleClick: (val: string) => void;
+  children: string;
 }
 
 function App() {
   const [userValue, setUserValue] = useState("");
 
-  const handleClick = (event: ButtonProps) => {
-    const buttonTarget = buttonData.find((item) => item.id === event.id);
-    console.log(buttonTarget);
-    if (event.value) {
-      setUserValue(event.value);
-    } else {
-      console.log("error value");
-    }
+  const handleClick = (val: string) => {
+    setUserValue(userValue + val);
   };
+
+  const handleEqual = () => {
+    setUserValue(math.evaluate(userValue));
+  };
+
+  const handleClear = () => {
+    setUserValue("");
+  };
+
+  // const calcul = (a: number, b: number, op: string) => {
+  //   switch (op) {
+  //     case "+":
+  //       return a + b;
+  //       break;
+  //     case "-":
+  //       return a - b;
+  //     case "*":
+  //       return a * b;
+  //       break;
+  //     case "%":
+  //       return a / b;
+  //       break;
+  //   }
+  // };
 
   return (
     <section className="flex justify-center text-center flex-col">
       <h1 className="my-6 ">Calculator</h1>
       <article className="bg-black p-2 border border-gold min-w-[340px] m-auto">
         <Screen display={userValue} />
-        <div id="calculator" className="grid grid-cols-4 grid-rows-5">
-          {buttonData.map((btn) => (
-            <button
-              key={btn.id}
-              id={btn.id}
-              className={btn.className}
-              data-key={btn.dataKey}
-              type="button"
-              onClick={() => handleClick(btn)}
-            >
-              {btn.value}
-            </button>
-          ))}
-        </div>
+        <Button handleClick={handleClick} handleClear={handleClear} />
       </article>
       <p className="my-6 leading-loose">
         Designed and Coded By
@@ -53,3 +57,12 @@ function App() {
 }
 
 export default App;
+
+// if (event.value) {
+//   setUserValue(event.value.toString());
+// } else {
+//   console.log("error value");
+// }
+
+// const valueAsNumber = Number(event.value);
+// console.log(calcul(valueAsNumber, 2, event.id));
