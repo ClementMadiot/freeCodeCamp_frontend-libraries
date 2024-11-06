@@ -6,7 +6,7 @@ interface ButtonDataProps {
 }
 type HandleProps = {
   handleClick?: (val: string) => void;
-  // handleEqual?: (val: string) => void;
+  handleEqual?: (val: string) => void;
   handleClear?: () => void;
 };
 
@@ -99,7 +99,7 @@ const buttonData: ButtonDataProps[] = [
     id: "equals",
     value: "=",
     dataKey: 13,
-    className: "row-span-2 bg-blue h-full",
+    className: "row-span-2 col-span-1 bg-blue h-full",
   },
   {
     id: "zero",
@@ -115,14 +115,16 @@ const buttonData: ButtonDataProps[] = [
   },
 ];
 
-function Button({ handleClick, handleClear }: HandleProps) {
+function Button({ handleClick, handleClear, handleEqual }: HandleProps) {
+
+  //* button "AC"
   const ClearButton: React.FC<{ handleClear: () => void }> = ({
-    handleClear
+    handleClear,
   }) => {
     return (
       <>
         {buttonData.slice(0, 1).map((btn) => (
-          <button 
+          <button
             key={btn.id}
             id={btn.id}
             className={btn.className}
@@ -134,14 +136,46 @@ function Button({ handleClick, handleClear }: HandleProps) {
         ))}
       </>
     );
-  }
-  // const clearButtonData = buttonData.slice(0, 1);
+  };
 
+  //* button "="
+  const EqualButton: React.FC<{ handleEqual: (val: string) => void }> = ({
+    handleEqual,
+  }) => {
+    return (
+      <>
+        {buttonData.slice(14, 15).map((btn) => (
+          <button
+            key={btn.id}
+            id={btn.id}
+            className={btn.className}
+            data-key={btn.dataKey}
+            onClick={() => handleEqual(String(btn.value))}
+          >
+            {btn.value}
+          </button>
+        ))}
+      </>
+    );
+  };
 
   return (
     <div id="calculator" className="grid grid-cols-4 grid-rows-5">
       {handleClear && <ClearButton handleClear={handleClear} />}
-      {buttonData.slice(1, 17).map((btn) => (
+      {buttonData.slice(1, 14).map((btn) => (
+        <button
+          key={btn.id}
+          id={btn.id}
+          className={btn.className}
+          data-key={btn.dataKey}
+          type="button"
+          onClick={() => handleClick && handleClick(String(btn.value))}
+        >
+          {btn.value}
+        </button>
+      ))}
+      {handleEqual && <EqualButton handleEqual={handleEqual} />}
+      {buttonData.slice(15, 17).map((btn) => (
         <button
           key={btn.id}
           id={btn.id}
