@@ -45,7 +45,7 @@ function App() {
       <h1 className="my-6 ">Calculator</h1>
       <article className="bg-black p-2 border border-gold min-w-[340px] m-auto">
         <Screen display={userValue} />
-        <Button handleClick={handleClick} handleClear={handleClear} />
+        <Button handleClick={handleClick} handleClear={handleClear} handleEqual={handleEqual} />
       </article>
       <p className="my-6 leading-loose">
         Designed and Coded By
