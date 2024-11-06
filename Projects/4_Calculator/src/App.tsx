@@ -6,8 +6,10 @@ import Button from "./components/Button";
 
 function App() {
   const [userValue, setUserValue] = useState("");
-
+  const [reset, setreset] = useState(true)
+  
   const handleClick = (val: string) => {
+    setreset(false)
     setUserValue(userValue + val);
   };
 
@@ -16,6 +18,7 @@ function App() {
   };
 
   const handleClear = () => {
+    setreset(true)
     setUserValue("");
   };
 
@@ -23,7 +26,7 @@ function App() {
     <section className="flex justify-center text-center flex-col">
       <h1 className="my-6 ">Calculator</h1>
       <article className="bg-black p-2 border border-gold min-w-[340px] m-auto">
-        <Screen display={userValue} />
+        <Screen reset={reset} display={userValue} />
         <Button handleClick={handleClick} handleClear={handleClear} handleEqual={handleEqual} />
       </article>
       <p className="my-6 leading-loose">
