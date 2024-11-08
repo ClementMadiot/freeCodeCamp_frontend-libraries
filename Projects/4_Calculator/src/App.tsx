@@ -4,12 +4,65 @@ import * as math from "mathjs";
 import Screen from "./components/Screen";
 import Button from "./components/Button";
 
+const endsWithOperator = /[+\-*/]$/;
+const endsWithNegativeSign = /\d[+\-*/]{1}-$/;
+
 function App() {
   const [userValue, setUserValue] = useState("0");
   const [reset, setreset] = useState(true);
 
+  // check Operator
   const isOperator = (key: string) => {
     return ["+", "-", "*", "/"].includes(key);
+  };
+
+  // Handle the last operators
+  const lastOperator = (val: string) => {
+    console.log(isOperator(val));
+    if (isOperator(val)) {
+      if (
+        val === "*" &&
+        endsWithOperator.test(userValue) &&
+        !userValue.endsWith("-")
+      ) {
+        setUserValue(userValue.slice(0, -1) + val);
+      } else if (endsWithOperator.test(userValue)) {
+        if (endsWithNegativeSign.test(userValue + val)) {
+          setUserValue(userValue + val);
+        } else {
+          setUserValue(userValue.slice(0, -1) + val);
+        }
+      } else {
+        setUserValue(userValue + val);
+      }
+      return true;
+    }
+    return false;
+  };
+
+  // onClick
+  const handleClick = (val: string) => {
+    // Delete a zero if number is higher
+    if (userValue === "0" && val > "0") {
+      setUserValue(val);
+      return;
+    }
+
+    // Not allow multiple decimal
+    const lastNumber = userValue.split(/[+\-*/]/).pop();
+    if (lastNumber && /[.]/.test(lastNumber) && val === ".") {
+      return;
+    }
+
+    // Handle the last operators
+    if (lastOperator(val)) {
+      return;
+    }
+
+    console.log(isOperator(val));
+
+    setreset(false);
+    setUserValue(userValue + val);
   };
 
   // Equal the result
@@ -28,24 +81,6 @@ function App() {
     setUserValue("0");
   }, [reset]);
 
-  // onClick
-  const handleClick = (val: string) => {
-    // Delete a zero if number is higher
-    if (userValue === "0" && val > "0") {
-      setUserValue(val);
-      return;
-    }
-
-    // Not allow multiple decimal
-    const lastNumber = userValue.split(/[+\-*/]/).pop();
-    if (lastNumber && /[.]/.test(lastNumber) && val === ".") {
-      return;
-    }
-
-    setreset(false);
-    setUserValue(userValue + val);
-  };
-
   useEffect(() => {
     // not allow to start with multiple 0
     if (userValue === "00") {
@@ -55,6 +90,16 @@ function App() {
     // keyboard
     const handler = (e: KeyboardEvent) => {
       const key = e.key;
+      
+      // Ignore function keys (F1-F12)
+      if (key.startsWith("F") && !isNaN(Number(key.slice(1)))) {
+        return;
+      }
+      // Handle the last operators
+      if (lastOperator(key)) {
+        return;
+      }
+
       if (key.match(/[0-9]/) || isOperator(key)) {
         e.preventDefault();
         setUserValue((prevValue) =>
@@ -77,7 +122,7 @@ function App() {
     return () => {
       document.removeEventListener("keydown", handler);
     };
-  }, [userValue, reset, handleClear, handleEqual]);
+  }, [userValue, reset, handleClear, handleEqual, lastOperator]);
 
   return (
     <section className="flex justify-center text-center flex-col">
