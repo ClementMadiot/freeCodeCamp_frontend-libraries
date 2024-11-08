@@ -50,7 +50,7 @@ Fourth project FreeCodeCamp to valid the certification "Front End Development Li
 
 - User Story #15: My calculator should have several decimal places of precision when it comes to rounding (note that there is no exact standard, but you should be able to handle calculations like 2 / 7 with reasonable precision to at least 4 decimal places).
 
-<!--! #7, #9, #12, #13, #14, #15 -->
+<!--! #7 ?, #9 ?, #12 ?, #13, #14, #15 -->
 
 ## <br /> <a name="tech-stack">🛠 Technology Used</a>
 

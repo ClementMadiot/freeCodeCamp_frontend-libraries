@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import * as math from "mathjs";
 // import Components
 import Screen from "./components/Screen";
@@ -8,16 +8,27 @@ function App() {
   const [userValue, setUserValue] = useState("0");
   const [reset, setreset] = useState(true);
 
-  if (userValue === "00") {
-    console.error("not allow to start with multiple zero");
-    return setUserValue("0");
-  }
+  const isOperator = (key: string) => {
+    return ["+", "-", "*", "/"].includes(key);
+  };
 
-  // if (reset === true && val === "*" || val === "/" || val === "+" || val === "-") {
-  //   alert(`not allow to start with ${val}`);
-  //   return;
-  // }
+  // Equal the result
+  const handleEqual = useCallback(() => {
+    if (userValue === "0") {
+      alert(`not allow to start with =`);
+      return;
+    }
+    const result = math.evaluate(userValue);
+    setUserValue(result.toString());
+  }, [userValue]);
 
+  // Clear the input
+  const handleClear = useCallback(() => {
+    setreset(reset);
+    setUserValue("0");
+  }, [reset]);
+
+  // onClick
   const handleClick = (val: string) => {
     // Delete a zero if number is higher
     if (userValue === "0" && val > "0") {
@@ -35,19 +46,38 @@ function App() {
     setUserValue(userValue + val);
   };
 
-  const handleEqual = () => {
-    if (userValue === "0") {
-      alert(`not allow to start with =`);
-      return;
+  useEffect(() => {
+    // not allow to start with multiple 0
+    if (userValue === "00") {
+      return setUserValue("0");
     }
-    const result = math.evaluate(userValue);
-    setUserValue(result.toString());
-  };
 
-  const handleClear = () => {
-    setreset(reset);
-    setUserValue("0");
-  };
+    // keyboard
+    const handler = (e: KeyboardEvent) => {
+      const key = e.key;
+      if (key.match(/[0-9]/) || isOperator(key)) {
+        e.preventDefault();
+        setUserValue((prevValue) =>
+          prevValue === "0" ? key : prevValue + key
+        );
+      } else if (key === "Enter") {
+        e.preventDefault();
+        handleEqual();
+      } else if (key === "Backspace") {
+        e.preventDefault();
+        setUserValue((prevValue) => prevValue.slice(0, -1) || "0");
+      } else if (key === "Escape") {
+        e.preventDefault();
+        handleClear();
+      }
+    };
+
+    document.addEventListener("keydown", handler);
+
+    return () => {
+      document.removeEventListener("keydown", handler);
+    };
+  }, [userValue, reset, handleClear, handleEqual]);
 
   return (
     <section className="flex justify-center text-center flex-col">
