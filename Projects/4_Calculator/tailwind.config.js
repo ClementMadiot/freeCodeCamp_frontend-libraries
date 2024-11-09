@@ -9,6 +9,7 @@ export default {
           200: "#c9c9c9",
         },
         gold: "#6F675B",
+        yellow: "#ffa500",
         red: "#8A2E2E",
         blue: "#003652",
         gold: "#8c8273",
