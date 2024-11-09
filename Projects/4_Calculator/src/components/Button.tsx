@@ -1,12 +1,10 @@
 interface ButtonDataProps {
   id: string;
-  value: string | number;
+  value: string ;
   className: string;
 }
 type HandleProps = {
-  handleClick?: (val: string) => void;
-  handleEqual?: (val: string) => void;
-  handleClear?: () => void;
+  handleClick: (val: string) => void;
 };
 
 const buttonData: ButtonDataProps[] = [
@@ -27,17 +25,17 @@ const buttonData: ButtonDataProps[] = [
   },
   {
     id: "seven",
-    value: 7,
+    value: "7",
     className: "bg-grey-200",
   },
   {
     id: "eight",
-    value: 8,
+    value: "8",
     className: "bg-grey-200",
   },
   {
     id: "nine",
-    value: 9,
+    value: "9",
     className: "bg-grey-200",
   },
   {
@@ -47,17 +45,17 @@ const buttonData: ButtonDataProps[] = [
   },
   {
     id: "four",
-    value: 4,
+    value: "4",
     className: "bg-grey-200",
   },
   {
     id: "five",
-    value: 5,
+    value: "5",
     className: "bg-grey-200",
   },
   {
     id: "six",
-    value: 6,
+    value: "6",
     className: "bg-grey-200",
   },
   {
@@ -67,17 +65,17 @@ const buttonData: ButtonDataProps[] = [
   },
   {
     id: "one",
-    value: 1,
+    value: "1",
     className: "bg-grey-200",
   },
   {
     id: "two",
-    value: 2,
+    value: "2",
     className: "bg-grey-200",
   },
   {
     id: "three",
-    value: 3,
+    value: "3",
     className: "bg-grey-200",
   },
   {
@@ -87,7 +85,7 @@ const buttonData: ButtonDataProps[] = [
   },
   {
     id: "zero",
-    value: 0,
+    value: "0",
     className: "col-span-2 w-full bg-grey-200",
   },
   {
@@ -97,70 +95,17 @@ const buttonData: ButtonDataProps[] = [
   },
 ];
 
-function Button({ handleClick, handleClear, handleEqual }: HandleProps) {
-
-  //* button "AC"
-  const ClearButton: React.FC<{ handleClear: () => void }> = ({
-    handleClear,
-  }) => {
-    return (
-      <>
-        {buttonData.slice(0, 1).map((btn) => (
-          <button
-            key={btn.id}
-            id={btn.id}
-            className={btn.className}
-            onClick={handleClear}
-          >
-            {btn.value}
-          </button>
-        ))}
-      </>
-    );
-  };
-
-  //* button "="
-  const EqualButton: React.FC<{ handleEqual: (val: string) => void }> = ({
-    handleEqual,
-  }) => {
-    return (
-      <>
-        {buttonData.slice(14, 15).map((btn) => (
-          <button
-            key={btn.id}
-            id={btn.id}
-            className={btn.className}
-            onClick={() => handleEqual(String(btn.value))}
-          >
-            {btn.value}
-          </button>
-        ))}
-      </>
-    );
-  };
+function Button({ handleClick}: HandleProps) {
 
   return (
     <div id="calculator" className="grid grid-cols-4 grid-rows-5">
-      {handleClear && <ClearButton handleClear={handleClear} />}
-      {buttonData.slice(1, 14).map((btn) => (
+      {buttonData.map((btn) => (
         <button
           key={btn.id}
           id={btn.id}
           className={btn.className}
           type="button"
-          onClick={() => handleClick && handleClick(String(btn.value))}
-        >
-          {btn.value}
-        </button>
-      ))}
-      {handleEqual && <EqualButton handleEqual={handleEqual} />}
-      {buttonData.slice(15, 17).map((btn) => (
-        <button
-          key={btn.id}
-          id={btn.id}
-          className={btn.className}
-          type="button"
-          onClick={() => handleClick && handleClick(String(btn.value))}
+          onClick={() => handleClick && handleClick(btn.value)}
         >
           {btn.value}
         </button>
