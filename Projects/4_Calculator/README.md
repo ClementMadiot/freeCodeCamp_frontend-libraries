@@ -50,7 +50,7 @@ Fourth project FreeCodeCamp to valid the certification "Front End Development Li
 
 - User Story #15: My calculator should have several decimal places of precision when it comes to rounding (note that there is no exact standard, but you should be able to handle calculations like 2 / 7 with reasonable precision to at least 4 decimal places).
 
-<!--! #9 ?, #12 ?, #13, #14 -->
+<!--! #9?, #12 ?, #13, #14 -->
 
 ## <br /> <a name="tech-stack">🛠 Technology Used</a>
 
@@ -102,7 +102,37 @@ yarn install
 
 # Code
 
-```jsx
+Should use tofixed method to rouding the result
 
+```jsx
+  // Handle the last operators
+  const lastOperator = useCallback(
+    (val: string) => {
+      const endsWithNegativeSign = /\d[+\-*/]{1}-$/;
+      if (isOperator(val)) {
+        // prettier-ignore
+        if( val === "*"  && !userValue.endsWith("-")) {
+        setUserValue(userValue.slice(0, -1) + val);
+      } else if (isOperator(userValue)) {
+        if (endsWithNegativeSign.test(userValue + val)) {
+          setUserValue(userValue + val);
+        } else {
+          setUserValue(userValue.slice(0, -1) + val);
+        }
+      } else {
+        setUserValue(userValue + val);
+      }
+        return true;
+      }
+      return false;
+    },
+    [userValue, isOperator]
+  );
+
+  //handleclick + keyboard
+  if (lastOperator(val)) {
+      // Handle the last operators
+      return;
+    }
 
 ```
