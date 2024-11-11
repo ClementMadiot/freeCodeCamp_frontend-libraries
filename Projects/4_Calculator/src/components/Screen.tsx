@@ -3,7 +3,7 @@ type DisplayProps = {
   calcul: string;
 };
 function Screen({ display, calcul }: DisplayProps) {
-  
+
   return (
     <div className="w-full min-h-[64px]">
     <div

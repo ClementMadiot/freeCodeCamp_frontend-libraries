@@ -18,23 +18,34 @@ function App() {
     switch (val) {
       // clear
       case "AC":
+        document.getElementById("decimal")?.removeAttribute("disabled");
         setUserValue("0");
         setCalcul("");
         return;
-        break;
       case "=":
         handleEqual();
         return;
-        break;
       // Decimal
       case ".":
-        if (val === ".") {
-          // split by operators and get last number
-          const lastNumber = calcul.split(/[-+/*]/g).pop();
-          // if last number already has a decimal., don't add another
-          if (lastNumber?.includes(".")) return;
-          setCalcul(calcul + val);
+        if (!userValue.includes(".")) {
+          setUserValue(userValue + ".");
+          setCalcul(calcul + ".");
         }
+        document.getElementById("decimal")?.setAttribute("disabled", "true");
+        break;
+      case "+":
+      case "*":
+      case "/":
+      case "-":
+        document.getElementById("decimal")?.removeAttribute("disabled");
+        setUserValue("");
+        setCalcul(calcul + val);
+        if (isOperator(calcul.charAt(calcul.length - 1)) && isOperator(val) && !/[0-9]/.test(val)) {
+          setUserValue(calcul.slice(0, -1) + val);
+          setCalcul(calcul.slice(0, -1) + val);
+            return;
+        }
+
         break;
       default:
         break;
@@ -47,22 +58,24 @@ function App() {
     }
 
     setUserValue(userValue + val);
+    setCalcul(calcul + val);
   };
 
   // Equal the result
   const handleEqual = useCallback(() => {
-    if (userValue === "") return;
-
     try {
+      if (calcul === "") return;
       // if last character is an operator, do nothing
       if (isOperator(calcul.charAt(calcul.length - 1))) return;
-      const result = math.evaluate(userValue);
+
+      const result = math.evaluate(calcul);
+
       setUserValue(result.toString());
-      setCalcul("");
+      // setCalcul(result.toString());
     } catch (error) {
       setCalcul(`${error}`);
     }
-  }, [isOperator, calcul, userValue]);
+  }, [isOperator, calcul]);
 
   useEffect(() => {
     // not allow to start with multiple 0
@@ -75,7 +88,7 @@ function App() {
       const key = e.key;
 
       // Ignore function keys (F1-F12)
-      if (key.startsWith("F") && !isNaN(Number(key.slice(1)))) {
+      if (key.startsWith("F")  && !isNaN(Number(key.slice(1)))) {
         return;
       }
 
@@ -97,6 +110,10 @@ function App() {
           setUserValue("0");
           setCalcul("");
           return;
+          break;
+        case ".":
+          setUserValue(userValue + ".");
+          setCalcul(calcul + ".");
           break;
         default:
       }

@@ -42,9 +42,9 @@ Fourth project FreeCodeCamp to valid the certification "Front End Development Li
 
 - User Story #11: When the decimal element is clicked, a . should append to the currently displayed value; two . in one number should not be accepted.
 
-- User Story #12: I should be able to perform any operation (+, -, *, /) on numbers containing decimal points.
+- User Story #12: I should be able to perform any operation (+, -, \*, /) on numbers containing decimal points.
 
-- User Story #13: If 2 or more operators are entered consecutively, the operation performed should be the last operator entered (excluding the negative (-) sign). For example, if 5 + * 7 = is entered, the result should be 35 (i.e. 5 * 7); if 5 * - 5 = is entered, the result should be -25 (i.e. 5 * (-5)).
+- User Story #13: If 2 or more operators are entered consecutively, the operation performed should be the last operator entered (excluding the negative (-) sign). For example, if 5 + _ 7 = is entered, the result should be 35 (i.e. 5 _ 7); if 5 _ - 5 = is entered, the result should be -25 (i.e. 5 _ (-5)).
 
 - User Story #14: Pressing an operator immediately following = should start a new calculation that operates on the result of the previous evaluation.
 
@@ -55,10 +55,10 @@ Fourth project FreeCodeCamp to valid the certification "Front End Development Li
 ## <br /> <a name="tech-stack">🛠 Technology Used</a>
 
 - [TailwindCSS](https://tailwindcss.com/docs/installation)
-Tailwind CSS is a valuable tool for developers who want to build modern, responsive, and visually appealing websites without sacrificing development speed.
+  Tailwind CSS is a valuable tool for developers who want to build modern, responsive, and visually appealing websites without sacrificing development speed.
 
 - [mathjs](https://mathjs.org/)
-Math.js is an extensive math library for JavaScript and Node.js. It features a flexible expression parser with support for symbolic computation, comes with a large set of built-in functions and constants, and offers an integrated solution to work with different data types like numbers, big numbers, complex numbers, fractions, units, and matrices. Powerful and easy to use.
+  Math.js is an extensive math library for JavaScript and Node.js. It features a flexible expression parser with support for symbolic computation, comes with a large set of built-in functions and constants, and offers an integrated solution to work with different data types like numbers, big numbers, complex numbers, fractions, units, and matrices. Powerful and easy to use.
 
 ## <br /> <a name="launch-app">🚀 Launch App</a>
 
@@ -66,12 +66,12 @@ Follow these steps to set up the project locally on your machine.
 
 **Prerequisites**
 
->[!NOTE]
+> [!NOTE]
 > Make sure you have the following installed on your machine:
 
 - [Git](https://git-scm.com/)
 - [Node.js](https://nodejs.org/en)
-- [npm](https://www.npmjs.com/) *(Node Package Manager)*
+- [npm](https://www.npmjs.com/) _(Node Package Manager)_
 
 **Cloning the Repository**
 
@@ -87,7 +87,7 @@ cd {git project..}
 _npm_
 
 ```
-npm install 
+npm install
 ```
 
 _yarn_
@@ -98,41 +98,16 @@ yarn install
 
 > Once the dependencies are installed, start the project with the command `npm run dev`.
 
-
-
 # Code
 
 Should use tofixed method to rouding the result
 
 ```jsx
-  // Handle the last operators
-  const lastOperator = useCallback(
-    (val: string) => {
-      const endsWithNegativeSign = /\d[+\-*/]{1}-$/;
-      if (isOperator(val)) {
-        // prettier-ignore
-        if( val === "*"  && !userValue.endsWith("-")) {
-        setUserValue(userValue.slice(0, -1) + val);
-      } else if (isOperator(userValue)) {
-        if (endsWithNegativeSign.test(userValue + val)) {
-          setUserValue(userValue + val);
-        } else {
-          setUserValue(userValue.slice(0, -1) + val);
-        }
-      } else {
-        setUserValue(userValue + val);
-      }
-        return true;
-      }
-      return false;
-    },
-    [userValue, isOperator]
-  );
-
-  //handleclick + keyboard
-  if (lastOperator(val)) {
-      // Handle the last operators
-      return;
-    }
-
+if (val === ".") {
+  // split by operators and get last number
+  const lastNumber = calcul.split(/[-+/*]/g).pop();
+  // if last number already has a decimal., don't add another
+  if (lastNumber?.includes(".")) return;
+  setCalcul(calcul + val);
+}
 ```
