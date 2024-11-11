@@ -38,7 +38,7 @@ function Button({ handleClick}: HandleProps) {
           id={btn.id}
           className={btn.className}
           type="button"
-          onClick={() => handleClick && handleClick(btn.value)}
+          onClick={() => handleClick(btn.value)}
         >
           {btn.value}
         </button>
