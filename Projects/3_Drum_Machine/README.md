@@ -1,6 +1,6 @@
 <div align="center" class="container">
 <picture>
-  <img alt="FreeCodeCamp" src="https://cdn.freecodecamp.org/platform/universal/fcc_primary.svg">
+  <a href=""><img alt="FreeCodeCamp" src="public/fcc-drum-machine.png"></a>
 </picture>
 <h3  align="center">Drum Machine</h3>
   </div>
@@ -49,6 +49,11 @@ Third project FreeCodeCamp to valid the certification "Front End Development Lib
 
 ## <br /> <a name="tech-stack">🛠 Technology Used</a>
 
+- [Sass](https://sass-lang.com/install/)
+Providing advanced features like variables, nesting, and mixins for more efficient and maintainable styling. Sass allows developers to write more complex and reusable CSS, reducing the amount of duplicate code and simplifying the design process.
+
+- [sass-embedded](https://www.npmjs.com/package/sass-embedded)
+This package provides the same JavaScript API as the sass package, and can be used as a drop-in replacement, Unlike the sass package, the asynchronous API in sass-embedded will generally be faster than the synchronous API since the Sass compilation logic is happening in a different process.
 
 
 ## <br /> <a name="launch-app">🚀 Launch App</a>
@@ -97,6 +102,149 @@ Global styling are defined using **SCSS**
 <summary><code>App.scss</code></summary>
 
 ```css
+
+@import url("https://fonts.googleapis.com/css2?family=Russo+One&display=swap");
+
+:root {
+  --font-Russo: "Russo One", sans-serif;
+  --bg-i-drum: linear-gradient(to top, #fddb92 0%, #d1fdff 100%);
+  --bg-pad: linear-gradient(to left, #bdbbbe 0%, #9d9ea3 100%),
+    radial-gradient(
+      88% 271%,
+      rgba(255, 255, 255, 0.25) 0%,
+      rgba(254, 254, 254, 0.25) 1%,
+      rgba(0, 0, 0, 0.25) 100%
+    ),
+    radial-gradient(
+      50% 100%,
+      rgba(255, 255, 255, 0.3) 0%,
+      rgba(0, 0, 0, 0.3) 100%
+    );
+  --bg-btn: radial-gradient(73% 147%, #eadfdf 59%, #ece2df 100%),
+    radial-gradient(
+      91% 146%,
+      rgba(255, 255, 255, 0.5) 47%,
+      rgba(0, 0, 0, 0.5) 100%
+    );
+  --border-gradient: linear-gradient(
+    90deg,
+    #a9fbed  0%,
+    #fdcf4f 35%,
+    #a9fbed 100%
+  );
+}
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+*,
+::before,
+::after {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+@mixin flex($justify-content, $align-items) {
+  display: flex;
+  justify-content: $justify-content;
+  align-items: $align-items;
+}
+
+@mixin content($border-radius) {
+  background-image: var(--bg-btn);
+  background-blend-mode: screen;
+  border: none;
+  border-radius: $border-radius;
+  box-shadow: 0 9px #999;
+  outline: none;
+}
+
+@mixin borderColor() {
+  border-radius: 4px;
+  border: 10px solid;
+  border-image-slice: 1;
+  border-image-source: var(--border-gradient);
+}
+
+body {
+  @include flex(center, center);
+  margin-top: 5rem;
+  min-height: 100vh;
+  background-size: cover;
+  padding: 2rem;
+  background-image: var(--bg-i-drum);
+}
+
+main {
+  @include flex(space-evenly, center);
+  background-image: var(--bg-pad);
+  background-blend-mode: normal, lighten, soft-light;
+  width: 660px;
+  padding: 1rem 0;
+  text-align: center;
+  font-family: var(--font-Russo);
+  position: relative;
+  @include borderColor();
+}
+
+#drum-machine {
+  display: grid;
+  grid-template-columns: 100px 100px 100px;
+  grid-template-rows: 100px 100px 100px;
+  align-items: center;
+  gap: 10px;
+
+  .drum-pad {
+    @include flex(center, center);
+    @include content(8px);
+    height: 80%;
+
+    cursor: pointer;
+    &:hover {
+      background-color: #3e8e41;
+    }
+    &:active {
+      background-color: #3e8e41;
+      box-shadow: 0 5px #666;
+      transform: translateY(4px);
+    }
+  }
+}
+
+.logo {
+  margin-top: 1rem;
+  font-style: italic;
+  display: flex;
+  align-items: center;
+  position: absolute;
+  top: 0;
+  right: 15px;
+  i {
+    font-weight: bold;
+    font-style: italic;
+    font-size: 20px;
+  }
+}
+#pad {
+  @include flex(center, center);
+  flex-direction: column;
+  gap: 2rem;
+
+.form-label {
+  @include flex(center, center);
+  margin: 1rem 0;
+}
+  #display {
+    @include content(3px);
+    width: 200px;
+    font-size: 1rem;
+    font-weight: bold;
+    padding: 15px;
+  }
+}
+
 
 ```
 </details>

@@ -1,9 +1,9 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import audioData from "./data/drumAudio";
 import "./style/App.scss";
 
 function App() {
-  const [volume, setVolume] = useState(5);
+  const [volume, setVolume] = useState(1);
 
   const drumMachine = (event) => {
     try {
@@ -12,7 +12,7 @@ function App() {
           `drum-${item.key}` === event.target.id ||
           item.key === event.target.innerText
       );
-      console.log(event.target.id);
+      // console.log(event.target.id);
       if (!drumKeyCode) return;
       if (drumKeyCode) {
         updateDisplay(drumKeyCode.id);
@@ -23,7 +23,7 @@ function App() {
     }
   };
 
-  const updateDisplay = (item) => {
+  const updateDisplay = useCallback((item) => {
     const display = document.getElementById("display");
     if (display) {
       display.textContent = item ? item : "";
@@ -31,44 +31,50 @@ function App() {
       console.warn("Display element not found");
       updateDisplay("Display element not found");
     }
-  };
+  }, []);
 
   const adjustVolume = (e) => {
     setVolume(e.target.value);
   };
 
-  const playNote = (item) => {
-    const audio = new Audio();
-    audio.src = item.src;
-    audio.volume = volume / 10; // Normalize volume to 0-1 range
-    audio.currentTime = 0; // Reset playback position
-    audio.play();
-  };
+  const playNote = useCallback(
+    (item) => {
+      const audioEl = document.getElementById(item.key);
+      // console.log(audioEl);
 
-  const keyDown = (event) => {
-    try {
-      const currentKey = audioData.find(
-        (item) => item.key === event.key.toUpperCase()
-      );
-      if (currentKey) {
-        console.log(
-          `key press: ${event.key.toUpperCase()} | key pad: ${currentKey.key}`
-        );
-        updateDisplay(currentKey.id);
-        playNote(currentKey);
+      if (audioEl) {
+        audioEl.volume = volume / 100; // Set the volume
+        audioEl.play();
       } else {
-        updateDisplay(`No matching key found "${event.key.toUpperCase()}"`);
+        console.error(`Audio element with id ${item.key} not found`);
       }
-    } catch (error) {
-      console.error(error);
-    }
-  };
+    },
+    [volume]
+  );
+
   useEffect(() => {
+    const keyDown = (event) => {
+      try {
+        const currentKey = audioData.find(
+          (item) => item.key === event.key.toUpperCase()
+        );
+        if (currentKey) {
+          // console.log(document.getElementById(currentKey.key));
+          updateDisplay(currentKey.id);
+          playNote(currentKey);
+        } else {
+          updateDisplay(`No matching key found "${event.key.toUpperCase()}"`);
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    };
     document.addEventListener("keydown", keyDown);
+
     return () => {
       document.removeEventListener("keydown", keyDown);
     };
-  });
+  }, [updateDisplay, playNote]);
 
   return (
     <main>
@@ -78,7 +84,7 @@ function App() {
             key={item.key}
             className="drum-pad"
             id={`drum-${item.key}`}
-            onClick={(e) => drumMachine(e)}
+            onClick={drumMachine}
           >
             {item.key}
             <audio id={item.key} src={item.src} className="clip" />
