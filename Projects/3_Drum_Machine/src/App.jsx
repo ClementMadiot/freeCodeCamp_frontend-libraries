@@ -40,8 +40,6 @@ function App() {
   const playNote = useCallback(
     (item) => {
       const audioEl = document.getElementById(item.key);
-      // console.log(audioEl);
-
       if (audioEl) {
         audioEl.volume = volume / 100; // Set the volume
         audioEl.play();
