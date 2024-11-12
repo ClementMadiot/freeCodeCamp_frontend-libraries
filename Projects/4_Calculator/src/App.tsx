@@ -11,8 +11,14 @@ const App = () => {
   const [calculatorData, setCalculatorData] = useState("");
 
   const handleSubmit = () => {
-    console.log("handleSubmit", calculatorData);
-    const total = eval(calculatorData);
+    let tempData = calculatorData;
+    const lastChar = calculatorData.charAt(calculatorData.length - 1);
+    
+    if (operators.includes(lastChar)) {
+      tempData = calculatorData.slice(0, -1);
+    }
+    
+    const total = eval(tempData);
     setInput(`${total}`);
     setOutput(`${total}`);
     setCalculatorData(`${total}`);

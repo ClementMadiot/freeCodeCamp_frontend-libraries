@@ -1,5 +1,5 @@
 <div align="center">
-  <a href="" target="_blanck"><img src="./public" alt=""></a>
+  <a href="https://codepen.io/ClementMadiot/pen/qBeLoQW" target="_blanck"><img src="./public/fcc-calculator.png" alt="calculator"></a>
    <div>
     <img src="https://img.shields.io/badge/-TypeScript-black?style=for-the-badge&logoColor=white&logo=typescript&color=3178C6" alt="typescript" />
     <img src="https://img.shields.io/badge/-Vite-black?style=for-the-badge&logoColor=white&logo=vite&color=646CFF" alt="vite" />
@@ -50,15 +50,11 @@ Fourth project FreeCodeCamp to valid the certification "Front End Development Li
 
 - User Story #15: My calculator should have several decimal places of precision when it comes to rounding (note that there is no exact standard, but you should be able to handle calculations like 2 / 7 with reasonable precision to at least 4 decimal places).
 
-<!--! #9?, #12 ?, #13, #14 -->
 
 ## <br /> <a name="tech-stack">🛠 Technology Used</a>
 
 - [TailwindCSS](https://tailwindcss.com/docs/installation)
   Tailwind CSS is a valuable tool for developers who want to build modern, responsive, and visually appealing websites without sacrificing development speed.
-
-- [mathjs](https://mathjs.org/)
-  Math.js is an extensive math library for JavaScript and Node.js. It features a flexible expression parser with support for symbolic computation, comes with a large set of built-in functions and constants, and offers an integrated solution to work with different data types like numbers, big numbers, complex numbers, fractions, units, and matrices. Powerful and easy to use.
 
 ## <br /> <a name="launch-app">🚀 Launch App</a>
 
@@ -97,58 +93,3 @@ yarn install
 ```
 
 > Once the dependencies are installed, start the project with the command `npm run dev`.
-
-# Code
-
-Should use tofixed method to rouding the result
-
-```jsx
-  useEffect(() => {
-    // not allow to start with multiple 0
-    if (input === "00") {
-      return setInput("0");
-    }
-
-    //* keyboard
-    const handler = (e: KeyboardEvent) => {
-      const key = e.key;
-
-      // Ignore function keys (F1-F12)
-      if (key.startsWith("F")  && !isNaN(Number(key.slice(1)))) {
-        return;
-      }
-
-      if (key.match(/[0-9]/) || isOperator(key)) {
-        e.preventDefault();
-        setInput((prevValue) =>
-          prevValue === "0" ? key : prevValue + key
-        );
-      }
-
-      switch (key) {
-        case "Enter":
-          handleEqual();
-          break;
-        case "Backspace":
-          setInput((prevValue) => prevValue.slice(0, -1) || "0");
-          break;
-        case "Escape":
-          setInput("0");
-          setOutput("");
-          return;
-          break;
-        case ".":
-          setInput(input + ".");
-          setOutput(output + ".");
-          break;
-        default:
-      }
-    };
-
-    document.addEventListener("keydown", handler);
-
-    return () => {
-      document.removeEventListener("keydown", handler);
-    };
-  }, [input, handleEqual, isOperator]);
-```
