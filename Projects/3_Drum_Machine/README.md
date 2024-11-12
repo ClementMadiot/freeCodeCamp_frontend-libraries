@@ -1,7 +1,10 @@
 <div align="center" class="container">
-<picture>
-  <a href=""><img alt="FreeCodeCamp" src="public/fcc-drum-machine.png"></a>
-</picture>
+  <a href="https://drum-machine-cm.netlify.app/"><img alt="FreeCodeCamp drum machine" src="public/fcc-drum-machine.png"></a>
+<div align="center">
+    <img src="https://img.shields.io/badge/-Vite-black?style=for-the-badge&logoColor=white&logo=vite&color=646CFF" alt="vite" />
+    <img src="https://img.shields.io/badge/-React_JS-black?style=for-the-badge&logoColor=white&logo=react&color=61DAFB" alt="react.js" />
+    <img src="https://img.shields.io/badge/Sass-CC6699?style=flat-square&logo=Sass&logoColor=white" height="28px" alt="sass" />
+</div>
 <h3  align="center">Drum Machine</h3>
   </div>
 </div>
@@ -45,16 +48,13 @@ Third project FreeCodeCamp to valid the certification "Front End Development Lib
 - [Kick](https://cdn.freecodecamp.org/testable-projects-fcc/audio/RP4_KICK_1.mp3)
 - [Closed-HH](https://cdn.freecodecamp.org/testable-projects-fcc/audio/Cev_H2.mp3)
 
-
-
 ## <br /> <a name="tech-stack">🛠 Technology Used</a>
 
 - [Sass](https://sass-lang.com/install/)
-Providing advanced features like variables, nesting, and mixins for more efficient and maintainable styling. Sass allows developers to write more complex and reusable CSS, reducing the amount of duplicate code and simplifying the design process.
+  Providing advanced features like variables, nesting, and mixins for more efficient and maintainable styling. Sass allows developers to write more complex and reusable CSS, reducing the amount of duplicate code and simplifying the design process.
 
 - [sass-embedded](https://www.npmjs.com/package/sass-embedded)
-This package provides the same JavaScript API as the sass package, and can be used as a drop-in replacement, Unlike the sass package, the asynchronous API in sass-embedded will generally be faster than the synchronous API since the Sass compilation logic is happening in a different process.
-
+  This package provides the same JavaScript API as the sass package, and can be used as a drop-in replacement, Unlike the sass package, the asynchronous API in sass-embedded will generally be faster than the synchronous API since the Sass compilation logic is happening in a different process.
 
 ## <br /> <a name="launch-app">🚀 Launch App</a>
 
@@ -62,12 +62,12 @@ Follow these steps to set up the project locally on your machine.
 
 **Prerequisites**
 
->[!NOTE]
+> [!NOTE]
 > Make sure you have the following installed on your machine:
 
 - [Git](https://git-scm.com/)
 - [Node.js](https://nodejs.org/en)
-- [npm](https://www.npmjs.com/) *(Node Package Manager)*
+- [npm](https://www.npmjs.com/) _(Node Package Manager)_
 
 **Cloning the Repository**
 
@@ -83,7 +83,7 @@ cd {git project..}
 _npm_
 
 ```
-npm install 
+npm install
 ```
 
 _yarn_
@@ -102,33 +102,27 @@ Global styling are defined using **SCSS**
 <summary><code>App.scss</code></summary>
 
 ```css
-
 @import url("https://fonts.googleapis.com/css2?family=Russo+One&display=swap");
 
 :root {
   --font-Russo: "Russo One", sans-serif;
   --bg-i-drum: linear-gradient(to top, #fddb92 0%, #d1fdff 100%);
-  --bg-pad: linear-gradient(to left, #bdbbbe 0%, #9d9ea3 100%),
-    radial-gradient(
+  --bg-pad: linear-gradient(to left, #bdbbbe 0%, #9d9ea3 100%), radial-gradient(
       88% 271%,
       rgba(255, 255, 255, 0.25) 0%,
       rgba(254, 254, 254, 0.25) 1%,
       rgba(0, 0, 0, 0.25) 100%
-    ),
-    radial-gradient(
-      50% 100%,
-      rgba(255, 255, 255, 0.3) 0%,
-      rgba(0, 0, 0, 0.3) 100%
-    );
+    ), radial-gradient(50% 100%, rgba(255, 255, 255, 0.3) 0%, rgba(
+          0,
+          0,
+          0,
+          0.3
+        ) 100%);
   --bg-btn: radial-gradient(73% 147%, #eadfdf 59%, #ece2df 100%),
-    radial-gradient(
-      91% 146%,
-      rgba(255, 255, 255, 0.5) 47%,
-      rgba(0, 0, 0, 0.5) 100%
-    );
+    radial-gradient(91% 146%, rgba(255, 255, 255, 0.5) 47%, rgba(0, 0, 0, 0.5) 100%);
   --border-gradient: linear-gradient(
     90deg,
-    #a9fbed  0%,
+    #a9fbed 0%,
     #fdcf4f 35%,
     #a9fbed 100%
   );
@@ -232,10 +226,10 @@ main {
   flex-direction: column;
   gap: 2rem;
 
-.form-label {
-  @include flex(center, center);
-  margin: 1rem 0;
-}
+  .form-label {
+    @include flex(center, center);
+    margin: 1rem 0;
+  }
   #display {
     @include content(3px);
     width: 200px;
@@ -244,8 +238,6 @@ main {
     padding: 15px;
   }
 }
-
-
 ```
-</details>
 
+</details>

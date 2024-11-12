@@ -3,8 +3,8 @@
   <a href="https://fcc-markdown-previewer-cm.netlify.app/"><img alt="Markdown-Previewer" src="./public/markdown-web-page.png"></a>
 </picture>
 <h3  align="center">Markdown Previewer</h3>
-    <img src="https://img.shields.io/badge/-React_JS-black?style=for-the-badge&logoColor=white&logo=react&color=61DAFB"  alt="react.js" />
     <img src="https://img.shields.io/badge/-Vite-black?style=for-the-badge&logoColor=white&logo=vite&color=646CFF"  alt="vite" />
+    <img src="https://img.shields.io/badge/-React_JS-black?style=for-the-badge&logoColor=white&logo=react&color=61DAFB"  alt="react.js" />
     <img src="https://img.shields.io/badge/Sass-CC6699?style=flat-square&logo=Sass&logoColor=white" height="28px" alt="sass" />
   </div>
 </div>
