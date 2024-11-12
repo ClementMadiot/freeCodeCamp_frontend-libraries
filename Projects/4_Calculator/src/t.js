@@ -1,18 +1,63 @@
-import { useEffect, useState } from "react";
-import Screen from "./components/Screen";
-import Button from "./components/Button";
+import React from "https://esm.sh/react";
+import ReactDOM from "https://esm.sh/react-dom";
 
-const operators = ["AC", "/", "*", "+", "-", "="];
+const calcData = [
+  { id: "clear", value: "AC" },
+  { id: "divide", value: "/" },
+  { id: "multiply", value: "x" },
+  { id: "seven", value: 7 },
+  { id: "eight", value: 8 },
+  { id: "nine", value: 9 },
+
+  { id: "subtract", value: "-" },
+
+  { id: "four", value: 4 },
+
+  { id: "five", value: 5 },
+
+  { id: "six", value: 6 },
+
+  { id: "add", value: "+" },
+  { id: "one", value: 1 },
+
+  { id: "two", value: 2 },
+  { id: "three", value: 3 },
+
+  { id: "equals", value: "=" },
+
+  { id: "zero", value: 0 },
+
+  { id: "decimal", value: "." },
+];
+
+const operators = ["AC", "/", "x", "+", "-", "="];
+
 const numbers = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
 
-const operators = ["AC", "/", "*", "+", "-", "="];
-
-const numbers = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
-
+const Display = ({ input, output }) => (
+  <div className="output">
+    <span className="result">{output}</span>
+    <span id="display" className="input">
+      {input}
+    </span>
+  </div>
+);
+const Key = ({ keyData: { id, value }, handleInput }) => (
+  <button id={id} onClick={() => handleInput(value)}>
+    {value}
+  </button>
+);
+const Keyboard = ({ handleInput }) => (
+  <div className="keys">
+    {calcData.map((key) => (
+      <Key key={key.id} keyData={key} handleInput={handleInput} />
+    ))}
+  </div>
+);
 const App = () => {
-  const [input, setInput] = useState("0");
-  const [output, setOutput] = useState("");
-  const [calculatorData, setCalculatorData] = useState("");
+  const [input, setInput] = React.useState("0");
+  const [output, setOutput] = React.useState("");
+  const [calculatorData, setCalculatorData] = React.useState("");
 
   const handleSubmit = () => {
     console.log("handleSubmit", calculatorData);
@@ -26,7 +71,7 @@ const App = () => {
     setOutput("");
     setCalculatorData("");
   };
-  const handleNumbers = (value: string | number) => {
+  const handleNumbers = (value) => {
     if (!calculatorData.length) {
       setInput(`${value}`);
       setCalculatorData(`${value}`);
@@ -35,7 +80,8 @@ const App = () => {
         setCalculatorData(`${calculatorData}`);
       } else {
         const lastChat = calculatorData.charAt(calculatorData.length - 1);
-        const isLastChatOperator = operators.includes(lastChat);
+        const isLastChatOperator =
+          lastChat === "*" || operators.includes(lastChat);
         setInput(isLastChatOperator ? `${value}` : `${input}${value}`);
         setCalculatorData(`${calculatorData}${value}`);
       }
@@ -47,7 +93,7 @@ const App = () => {
       setInput("0.");
       setCalculatorData("0.");
     } else {
-      if (operators.includes(lastChat)) {
+      if (lastChat === "*" || operators.includes(lastChat)) {
         setInput("0.");
         setCalculatorData(`${calculatorData} 0.`);
       } else {
@@ -62,14 +108,17 @@ const App = () => {
       }
     }
   };
-  const handleOperators = (value: string | number) => {
+  const handleOperators = (value) => {
     if (calculatorData.length) {
       setInput(`${value}`);
       console.log({ calculatorData });
       const beforeLastChat = calculatorData.charAt(calculatorData.length - 2);
-      const beforeLastChatIsOperator = operators.includes(beforeLastChat);
+      const beforeLastChatIsOperator =
+        operators.includes(beforeLastChat) || beforeLastChat === "*";
+        
       const lastChat = calculatorData.charAt(calculatorData.length - 1);
-      const lastChatIsOperator = operators.includes(lastChat);
+      const lastChatIsOperator =
+        operators.includes(lastChat) || lastChat === "*";
       const validOp = value === "x" ? "*" : value;
       if (
         (lastChatIsOperator && value !== "-") ||
@@ -94,8 +143,7 @@ const App = () => {
       }
     }
   };
-
-  const handleClick = (value: string | number) => {
+  const handleInput = (value) => {
     const number = numbers.find((num) => num === value);
     const operator = operators.find((op) => op === value);
     switch (value) {
@@ -109,7 +157,7 @@ const App = () => {
         handleNumbers(value);
         break;
       case ".":
-        dotOperator();
+        dotOperator(value);
         break;
       case operator:
         handleOperators(value);
@@ -118,29 +166,19 @@ const App = () => {
         break;
     }
   };
-  useEffect(() => {
-    const handleOutput = () => {
-      setOutput(calculatorData);
-    };
+  const handleOutput = () => {
+    setOutput(calculatorData);
+  };
+  React.useEffect(() => {
     handleOutput();
   }, [calculatorData]);
   return (
-    <section className="flex text-center flex-col max-w-[340px] mx-auto">
-      <h1 className="my-6 ">Calculator</h1>
-
-
-        <div className="bg-black p-2 border border-gold min-w-[340px] m-auto">
-          <Screen input={input} output={output} />
-          <Button handleClick={handleClick} />
-        </div>
-
-      <p className="my-6 leading-loose">
-        Designed and Coded By
-        <br />
-        <span className="text-white-200">Clément Madiot</span>
-      </p>
-    </section>
+    <div className="container">
+      <div className="calculator">
+        <Display input={input} output={output} />
+        <Keyboard handleInput={handleInput} />
+      </div>
+    </div>
   );
 };
-
-export default App;
+ReactDOM.render(<App />, document.getElementById("app"));
