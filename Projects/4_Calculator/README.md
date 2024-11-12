@@ -103,11 +103,52 @@ yarn install
 Should use tofixed method to rouding the result
 
 ```jsx
-if (val === ".") {
-  // split by operators and get last number
-  const lastNumber = calcul.split(/[-+/*]/g).pop();
-  // if last number already has a decimal., don't add another
-  if (lastNumber?.includes(".")) return;
-  setCalcul(calcul + val);
-}
+  useEffect(() => {
+    // not allow to start with multiple 0
+    if (input === "00") {
+      return setInput("0");
+    }
+
+    //* keyboard
+    const handler = (e: KeyboardEvent) => {
+      const key = e.key;
+
+      // Ignore function keys (F1-F12)
+      if (key.startsWith("F")  && !isNaN(Number(key.slice(1)))) {
+        return;
+      }
+
+      if (key.match(/[0-9]/) || isOperator(key)) {
+        e.preventDefault();
+        setInput((prevValue) =>
+          prevValue === "0" ? key : prevValue + key
+        );
+      }
+
+      switch (key) {
+        case "Enter":
+          handleEqual();
+          break;
+        case "Backspace":
+          setInput((prevValue) => prevValue.slice(0, -1) || "0");
+          break;
+        case "Escape":
+          setInput("0");
+          setOutput("");
+          return;
+          break;
+        case ".":
+          setInput(input + ".");
+          setOutput(output + ".");
+          break;
+        default:
+      }
+    };
+
+    document.addEventListener("keydown", handler);
+
+    return () => {
+      document.removeEventListener("keydown", handler);
+    };
+  }, [input, handleEqual, isOperator]);
 ```

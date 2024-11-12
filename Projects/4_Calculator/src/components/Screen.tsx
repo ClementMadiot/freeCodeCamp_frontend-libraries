@@ -1,8 +1,8 @@
 type DisplayProps = {
-  display: string;
-  calcul: string;
+  input: string;
+  output: string;
 };
-function Screen({ display, calcul }: DisplayProps) {
+function Screen({ input, output }: DisplayProps) {
 
   return (
     <div className="w-full min-h-[64px]">
@@ -10,9 +10,9 @@ function Screen({ display, calcul }: DisplayProps) {
       id="display"
       className="bg-black text-whiteSmoke  text-end text-3xl"
     >
-      {display}
+      {input}
     </div>
-    <div id="calcul" className="text-end text-yellow text-lg">{calcul}</div>
+    <div className="text-end text-yellow text-lg">{output}</div>
     </div>
   );
 }

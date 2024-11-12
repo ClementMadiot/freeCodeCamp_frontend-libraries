@@ -1,138 +1,136 @@
-import { useCallback, useEffect, useState } from "react";
-import * as math from "mathjs";
-// import Components
+import { useEffect, useState } from "react";
 import Screen from "./components/Screen";
 import Button from "./components/Button";
 
-function App() {
-  const [userValue, setUserValue] = useState("");
-  const [calcul, setCalcul] = useState("");
+const operators = ["AC", "/", "*", "+", "-", "="];
 
-  // check Operator
-  const isOperator = useCallback((val: string) => {
-    return /[+\-*/]/.test(val);
-  }, []);
+const numbers = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
 
-  // onClick
-  const handleClick = (val: string) => {
-    switch (val) {
-      // clear
-      case "AC":
-        document.getElementById("decimal")?.removeAttribute("disabled");
-        setUserValue("0");
-        setCalcul("");
-        return;
+const App = () => {
+  const [input, setInput] = useState("0");
+  const [output, setOutput] = useState("");
+  const [calculatorData, setCalculatorData] = useState("");
+
+  const handleSubmit = () => {
+    console.log("handleSubmit", calculatorData);
+    const total = eval(calculatorData);
+    setInput(`${total}`);
+    setOutput(`${total}`);
+    setCalculatorData(`${total}`);
+  };
+  const handleClear = () => {
+    setInput("0");
+    setOutput("");
+    setCalculatorData("");
+  };
+  const handleNumbers = (value: string | number) => {
+    if (!calculatorData.length) {
+      setInput(`${value}`);
+      setCalculatorData(`${value}`);
+    } else {
+      if (value === 0 && (calculatorData === "0" || input === "0")) {
+        setCalculatorData(`${calculatorData}`);
+      } else {
+        const lastChat = calculatorData.charAt(calculatorData.length - 1);
+        const isLastChatOperator = operators.includes(lastChat);
+        setInput(isLastChatOperator ? `${value}` : `${input}${value}`);
+        setCalculatorData(`${calculatorData}${value}`);
+      }
+    }
+  };
+  const dotOperator = () => {
+    const lastChat = calculatorData.charAt(calculatorData.length - 1);
+    if (!calculatorData.length) {
+      setInput("0.");
+      setCalculatorData("0.");
+    } else {
+      if (operators.includes(lastChat)) {
+        setInput("0.");
+        setCalculatorData(`${calculatorData} 0.`);
+      } else {
+        setInput(
+          lastChat === "." || input.includes(".") ? `${input}` : `${input}.`
+        );
+        const formattedValue =
+          lastChat === "." || input.includes(".")
+            ? `${calculatorData}`
+            : `${calculatorData}.`;
+        setCalculatorData(formattedValue);
+      }
+    }
+  };
+  const handleOperators = (value: string | number) => {
+    if (calculatorData.length) {
+      setInput(`${value}`);
+      console.log({ calculatorData });
+      const beforeLastChat = calculatorData.charAt(calculatorData.length - 2);
+      const beforeLastChatIsOperator = operators.includes(beforeLastChat);
+      const lastChat = calculatorData.charAt(calculatorData.length - 1);
+      const lastChatIsOperator = operators.includes(lastChat);
+      const validOp = value === "x" ? "*" : value;
+      if (
+        (lastChatIsOperator && value !== "-") ||
+        (beforeLastChatIsOperator && lastChatIsOperator)
+      ) {
+        if (beforeLastChatIsOperator) {
+          const updatedValue = `${calculatorData.substring(
+            0,
+            calculatorData.length - 2
+          )}${value}`;
+          setCalculatorData(updatedValue);
+        } else {
+          setCalculatorData(
+            `${calculatorData.substring(
+              0,
+              calculatorData.length - 1
+            )}${validOp}`
+          );
+        }
+      } else {
+        setCalculatorData(`${calculatorData}${validOp}`);
+      }
+    }
+  };
+
+  const handleClick = (value: string | number) => {
+    const number = numbers.find((num) => num === value);
+    const operator = operators.find((op) => op === value);
+    switch (value) {
       case "=":
-        handleEqual();
-        return;
-      // Decimal
-      case ".":
-        if (!userValue.includes(".")) {
-          setUserValue(userValue + ".");
-          setCalcul(calcul + ".");
-        }
-        document.getElementById("decimal")?.setAttribute("disabled", "true");
+        handleSubmit();
         break;
-      case "+":
-      case "*":
-      case "/":
-      case "-":
-        document.getElementById("decimal")?.removeAttribute("disabled");
-        setUserValue("");
-        setCalcul(calcul + val);
-        if (isOperator(calcul.charAt(calcul.length - 1)) && isOperator(val) && !/[0-9]/.test(val)) {
-          setUserValue(calcul.slice(0, -1) + val);
-          setCalcul(calcul.slice(0, -1) + val);
-            return;
-        }
-
+      case "AC":
+        handleClear();
+        break;
+      case number:
+        handleNumbers(value);
+        break;
+      case ".":
+        dotOperator();
+        break;
+      case operator:
+        handleOperators(value);
         break;
       default:
         break;
     }
-    // Delete a zero if number is higher
-    if (userValue === "0" && val > "0") {
-      setUserValue(val);
-      setCalcul(val);
-      return;
-    }
-
-    setUserValue(userValue + val);
-    setCalcul(calcul + val);
   };
-
-  // Equal the result
-  const handleEqual = useCallback(() => {
-    try {
-      if (calcul === "") return;
-      // if last character is an operator, do nothing
-      if (isOperator(calcul.charAt(calcul.length - 1))) return;
-
-      const result = math.evaluate(calcul);
-
-      setUserValue(result.toString());
-      // setCalcul(result.toString());
-    } catch (error) {
-      setCalcul(`${error}`);
-    }
-  }, [isOperator, calcul]);
-
   useEffect(() => {
-    // not allow to start with multiple 0
-    if (userValue === "00") {
-      return setUserValue("0");
-    }
-
-    //* keyboard
-    const handler = (e: KeyboardEvent) => {
-      const key = e.key;
-
-      // Ignore function keys (F1-F12)
-      if (key.startsWith("F")  && !isNaN(Number(key.slice(1)))) {
-        return;
-      }
-
-      if (key.match(/[0-9]/) || isOperator(key)) {
-        e.preventDefault();
-        setUserValue((prevValue) =>
-          prevValue === "0" ? key : prevValue + key
-        );
-      }
-
-      switch (key) {
-        case "Enter":
-          handleEqual();
-          break;
-        case "Backspace":
-          setUserValue((prevValue) => prevValue.slice(0, -1) || "0");
-          break;
-        case "Escape":
-          setUserValue("0");
-          setCalcul("");
-          return;
-          break;
-        case ".":
-          setUserValue(userValue + ".");
-          setCalcul(calcul + ".");
-          break;
-        default:
-      }
+    const handleOutput = () => {
+      setOutput(calculatorData);
     };
-
-    document.addEventListener("keydown", handler);
-
-    return () => {
-      document.removeEventListener("keydown", handler);
-    };
-  }, [userValue, handleEqual, isOperator]);
-
+    handleOutput();
+  }, [calculatorData]);
   return (
     <section className="flex text-center flex-col max-w-[340px] mx-auto">
       <h1 className="my-6 ">Calculator</h1>
-      <article className="bg-black p-2 border border-gold min-w-[340px] m-auto">
-        <Screen display={userValue} calcul={calcul} />
-        <Button handleClick={handleClick} />
-      </article>
+
+
+        <div className="bg-black p-2 border border-gold min-w-[340px] m-auto">
+          <Screen input={input} output={output} />
+          <Button handleClick={handleClick} />
+        </div>
+
       <p className="my-6 leading-loose">
         Designed and Coded By
         <br />
@@ -140,6 +138,6 @@ function App() {
       </p>
     </section>
   );
-}
+};
 
 export default App;
