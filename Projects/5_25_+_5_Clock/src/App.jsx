@@ -1,11 +1,13 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 function App() {
   const [breakLength, setBreakLength] = useState(5);
-  const [sessionLength, setSessionLength] = useState(25);
+  const [sessionLength, setSessionLength] = useState(1);
   const [minutes, setMinutes] = useState(sessionLength);
   const [seconds, setSeconds] = useState(0);
   const [clicked, setClicked] = useState(false);
+  const [isBreak, setIsBreak] = useState(false);
+  const timerLabelRef = useRef(null)
 
   if (breakLength < 1) {
     setBreakLength(1);
@@ -22,10 +24,17 @@ function App() {
           setMinutes(minutes - 1);
           setSeconds(59);
         }
-      }, 1000);
+        if (minutes === 0 && seconds === 0) {
+          timerLabelRef.current.textContent = "Break";
+          setIsBreak(!isBreak);
+          setMinutes(breakLength);
+        } else if (isBreak && minutes === 0) {
+          timerLabelRef.current.textContent = "Session";
+        }
+      }, 10);
       return () => clearInterval(timer);
     }
-  }, [clicked, seconds, minutes]);
+  }, [clicked, seconds, minutes, isBreak, breakLength]);
 
   return (
     <section className="flex justify-center flex-col">
@@ -91,11 +100,12 @@ function App() {
       </section>
       {/* timer section  */}
       <article className="flex flex-col justify-center my-6 text-center">
-        <div id="timer-label" className="my-4 text-2xl">
+        <div id="timer-label" ref={timerLabelRef} className="my-4 text-2xl">
           Session
         </div>
         <div id="timer-left" className="text-6xl">
-          {minutes}:{seconds < 10 ? `0${seconds}` : seconds}
+          {minutes < 10 ? `0${minutes}` : minutes}:
+          {seconds < 10 ? `0${seconds}` : seconds}
         </div>
         <div className="flex justify-evenly mt-8">
           <button
@@ -121,7 +131,8 @@ function App() {
               setClicked(false);
               setSeconds(0);
               setBreakLength(5);
-              setMinutes(25);
+              setSessionLength(1);
+              setMinutes(1);
             }}
           >
             reset
