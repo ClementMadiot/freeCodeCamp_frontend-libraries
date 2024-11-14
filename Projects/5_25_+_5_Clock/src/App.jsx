@@ -9,6 +9,17 @@ function App() {
   const [isBreak, setIsBreak] = useState(false);
   const timerLabelRef = useRef(null);
 
+  const clearTimes = () => {
+    clearInterval(clicked);
+    setClicked(false);
+    setSeconds(0);
+    setBreakLength(5);
+    setSessionLength(25);
+    setMinutes(25);
+    timerLabelRef.current.textContent = "Session";
+    console.log("clear");
+  }
+
   useEffect(() => {
     if (breakLength < 1) {
       setBreakLength(1);
@@ -26,6 +37,11 @@ function App() {
 
   useEffect(() => {
     if (clicked) {
+      console.log("time on");
+      if (timerLabelRef.current.textContent !== "a break has begun") {
+        timerLabelRef.current.textContent = "a session has begun";
+      }
+
       const timer = setInterval(() => {
         if (seconds > 0) {
           setSeconds(seconds - 1);
@@ -41,12 +57,14 @@ function App() {
           timerLabelRef.current.textContent = "a session has begun";
           setMinutes(sessionLength);
           setIsBreak(!isBreak);
-        }        
+        }
       }, 1000);
       return () => clearInterval(timer);
     }
+    console.log("time off");
+    setClicked(false);
   }, [clicked, seconds, minutes, isBreak, breakLength, sessionLength]);
-  
+
   return (
     <section className="flex justify-center flex-col">
       <h1 className="text-5xl my-6 mx-auto ">25 + 5 Clock</h1>
@@ -122,34 +140,14 @@ function App() {
           <button
             id="start_stop"
             className="bg-blue-700 hover:bg-blue-800  focus:ring-blue-300"
-            onClick={() => {
-              setClicked(!clicked);
-              if (timerLabelRef.current.textContent !== "a break has begun") {
-                timerLabelRef.current.textContent = "a session has begun";
-              }
-              if (!clicked) {
-                console.log("time on");
-              } else {
-                console.log("time off");
-                setClicked(false);
-              }
-            }}
+            onClick={() => setClicked(!clicked)}
           >
             Start - stop
           </button>
           <button
             id="reset"
             className=" bg-purple-700 hover:bg-purple-800  focus:ring-purple-300"
-            onClick={() => {
-              clearInterval(clicked);
-              setClicked(false);
-              setSeconds(0);
-              setBreakLength(5);
-              setSessionLength(25);
-              setMinutes(25);
-              timerLabelRef.current.textContent = "Session";
-              console.log("clear");
-            }}
+            onClick={clearTimes}
           >
             reset
           </button>
