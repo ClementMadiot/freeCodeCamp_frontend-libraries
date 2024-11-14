@@ -20,6 +20,8 @@ Fifth project FreeCodeCamp to valid the certification "Front End Development Lib
 
 **User Story :**
 
+# Content
+
 - User Story #1: I can see an element with id="break-label" that contains a string (e.g. "Break Length"). ✅
 
 - User Story #2: I can see an element with id="session-label" that contains a string (e.g. "Session Length"). ✅
@@ -39,6 +41,8 @@ Fifth project FreeCodeCamp to valid the certification "Front End Development Lib
 - User Story #9: I can see a clickable element with a corresponding id="start_stop". ✅
 
 - User Story #10: I can see a clickable element with a corresponding id="reset". ✅
+
+# Timer
 
 - User Story #11: When I click the element with the id of reset, any running timer should be stopped, the value within id="break-length" should return to 5, the value within id="session-length" should return to 25, and the element with id="time-left" should reset to its default state. ✅
 
@@ -62,19 +66,21 @@ Fifth project FreeCodeCamp to valid the certification "Front End Development Lib
 
 - User Story #21: If the timer is paused and I click the element with id="start_stop", the countdown should resume running from the point at which it was paused. ✅
 
-- User Story #22: When a session countdown reaches zero (NOTE: timer MUST reach 00:00), and a new countdown begins, the element with the id of timer-label should display a string indicating a break has begun. ✅
+- User Story #22: When a session countdown reaches zero (NOTE: timer MUST reach 00:00), and a new countdown begins, the element with the id of timer-label should display a string indicating a break has begun. ❌
 
 - User Story #23: When a session countdown reaches zero (NOTE: timer MUST reach 00:00), a new break countdown should begin, counting down from the value currently displayed in the id="break-length" element. ✅
 
-- User Story #24: When a break countdown reaches zero (NOTE: timer MUST reach 00:00), and a new countdown begins, the element with the id of timer-label should display a string indicating a session has begun. ✅
+- User Story #24: When a break countdown reaches zero (NOTE: timer MUST reach 00:00), and a new countdown begins, the element with the id of timer-label should display a string indicating a session has begun.✅
 
-- User Story #25: When a break countdown reaches zero (NOTE: timer MUST reach 00:00), a new session countdown should begin, counting down from the value currently displayed in the id="session-length" element. ✅
+- User Story #25: When a break countdown reaches zero (NOTE: timer MUST reach 00:00), a new session countdown should begin, counting down from the value currently displayed in the id="session-length" element.✅
 
-- User Story #26: When a countdown reaches zero (NOTE: timer MUST reach 00:00), a sound indicating that time is up should play. This should utilize an HTML5 audio tag and have a corresponding id="beep".
+# Audio
 
-- User Story #27: The audio element with id="beep" must be 1 second or longer.
+- User Story #26: When a countdown reaches zero (NOTE: timer MUST reach 00:00), a sound indicating that time is up should play. This should utilize an HTML5 audio tag and have a corresponding id="beep".❌
 
-- User Story #28: The audio element with id of beep must stop playing and be rewound to the beginning when the element with the id of reset is clicked.
+- User Story #27: The audio element with id="beep" must be 1 second or longer.❌
+
+- User Story #28: The audio element with id of beep must stop playing and be rewound to the beginning when the element with the id of reset is clicked.❌
 
 
 ## <br /> <a name="tech-stack">🛠 Technology Used</a>

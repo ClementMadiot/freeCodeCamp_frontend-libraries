@@ -2,18 +2,27 @@ import { useEffect, useRef, useState } from "react";
 
 function App() {
   const [breakLength, setBreakLength] = useState(5);
-  const [sessionLength, setSessionLength] = useState(1);
+  const [sessionLength, setSessionLength] = useState(25);
   const [minutes, setMinutes] = useState(sessionLength);
   const [seconds, setSeconds] = useState(0);
   const [clicked, setClicked] = useState(false);
   const [isBreak, setIsBreak] = useState(false);
-  const timerLabelRef = useRef(null)
+  const timerLabelRef = useRef(null);
 
-  if (breakLength < 1) {
-    setBreakLength(1);
-  } else if (breakLength > 60) {
-    setBreakLength(60);
-  }
+  useEffect(() => {
+    if (breakLength < 1) {
+      setBreakLength(1);
+    } else if (breakLength > 60) {
+      setBreakLength(60);
+    }
+    if (sessionLength <= 1) {
+      setSessionLength(1);
+      setMinutes(1);
+    } else if (sessionLength > 60) {
+      setSessionLength(60);
+      setMinutes(60);
+    }
+  }, [breakLength, sessionLength]);
 
   useEffect(() => {
     if (clicked) {
@@ -24,18 +33,20 @@ function App() {
           setMinutes(minutes - 1);
           setSeconds(59);
         }
-        if (minutes === 0 && seconds === 0) {
-          timerLabelRef.current.textContent = "Break";
+        if (!isBreak && minutes === 0 && seconds === 0) {
+          timerLabelRef.current.textContent = "a break has begun";
           setIsBreak(!isBreak);
           setMinutes(breakLength);
-        } else if (isBreak && minutes === 0) {
-          timerLabelRef.current.textContent = "Session";
-        }
-      }, 10);
+        } else if (isBreak && minutes === 0 && seconds === 0) {
+          timerLabelRef.current.textContent = "a session has begun";
+          setMinutes(sessionLength);
+          setIsBreak(!isBreak);
+        }        
+      }, 1000);
       return () => clearInterval(timer);
     }
-  }, [clicked, seconds, minutes, isBreak, breakLength]);
-
+  }, [clicked, seconds, minutes, isBreak, breakLength, sessionLength]);
+  
   return (
     <section className="flex justify-center flex-col">
       <h1 className="text-5xl my-6 mx-auto ">25 + 5 Clock</h1>
@@ -103,7 +114,7 @@ function App() {
         <div id="timer-label" ref={timerLabelRef} className="my-4 text-2xl">
           Session
         </div>
-        <div id="timer-left" className="text-6xl">
+        <div id="time-left" className="text-6xl">
           {minutes < 10 ? `0${minutes}` : minutes}:
           {seconds < 10 ? `0${seconds}` : seconds}
         </div>
@@ -113,6 +124,9 @@ function App() {
             className="bg-blue-700 hover:bg-blue-800  focus:ring-blue-300"
             onClick={() => {
               setClicked(!clicked);
+              if (timerLabelRef.current.textContent !== "a break has begun") {
+                timerLabelRef.current.textContent = "a session has begun";
+              }
               if (!clicked) {
                 console.log("time on");
               } else {
@@ -131,8 +145,10 @@ function App() {
               setClicked(false);
               setSeconds(0);
               setBreakLength(5);
-              setSessionLength(1);
-              setMinutes(1);
+              setSessionLength(25);
+              setMinutes(25);
+              timerLabelRef.current.textContent = "Session";
+              console.log("clear");
             }}
           >
             reset
