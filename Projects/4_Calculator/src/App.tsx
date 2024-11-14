@@ -13,11 +13,11 @@ const App = () => {
   const handleSubmit = () => {
     let tempData = calculatorData;
     const lastChar = calculatorData.charAt(calculatorData.length - 1);
-    
+
     if (operators.includes(lastChar)) {
       tempData = calculatorData.slice(0, -1);
     }
-    
+
     const total = eval(tempData);
     setInput(`${total}`);
     setOutput(`${total}`);
@@ -130,11 +130,10 @@ const App = () => {
     <section className="flex text-center flex-col max-w-[340px] mx-auto">
       <h1 className="my-6 ">Calculator</h1>
 
-
-        <div className="bg-black p-2 border border-gold min-w-[340px] m-auto">
-          <Screen input={input} output={output} />
-          <Button handleClick={handleClick} />
-        </div>
+      <div className="bg-black p-2 border border-gold min-w-[340px] m-auto">
+        <Screen input={input} output={output} />
+        <Button handleClick={handleClick} />
+      </div>
 
       <p className="my-6 leading-loose">
         Designed and Coded By

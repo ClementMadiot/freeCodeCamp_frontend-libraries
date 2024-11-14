@@ -1,8 +1,31 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 function App() {
-  const [breakLength, setBreakLength] = useState("5");
-  const [sessionLength, setSessionLength] = useState("25");
+  const [breakLength, setBreakLength] = useState(5);
+  const [sessionLength, setSessionLength] = useState(25);
+  const [minutes, setMinutes] = useState(sessionLength);
+  const [seconds, setSeconds] = useState(0);
+  const [clicked, setClicked] = useState(false);
+
+  if (breakLength < 1) {
+    setBreakLength(1);
+  } else if (breakLength > 60) {
+    setBreakLength(60);
+  }
+
+  useEffect(() => {
+    if (clicked) {
+      const timer = setInterval(() => {
+        if (seconds > 0) {
+          setSeconds(seconds - 1);
+        } else if (minutes > 0) {
+          setMinutes(minutes - 1);
+          setSeconds(59);
+        }
+      }, 1000);
+      return () => clearInterval(timer);
+    }
+  }, [clicked, seconds, minutes]);
 
   return (
     <section className="flex justify-center flex-col">
@@ -11,30 +34,98 @@ function App() {
       <section className="flex justify-evenly mt-6">
         {/* break section  */}
         <article className="w-60 text-center my-4">
-          <div id="break-label" className="text-2xl">Break Length</div>
+          <div id="break-label" className="text-2xl">
+            Break Length
+          </div>
           <div className="flex justify-between mt-6">
-            <button id="break-increment" className=" bg-green-700 hover:bg-green-800  focus:ring-green-300 ">+1</button>
-            <p id="break-length" className="flex items-center text-2xl">{breakLength}</p>
-            <button id="break-decrement" className=" bg-yellow-400 hover:bg-yellow-500  focus:ring-yellow-300 ">-1</button>
+            <button
+              id="break-increment"
+              className="bg-green-700 hover:bg-green-800 focus:ring-green-300 "
+              onClick={() => setBreakLength(breakLength + 1)}
+            >
+              +1
+            </button>
+            <p id="break-length" className="flex items-center text-2xl">
+              {breakLength}
+            </p>
+            <button
+              id="break-decrement"
+              className=" bg-yellow-400 hover:bg-yellow-500  focus:ring-yellow-300 "
+              onClick={() => setBreakLength(breakLength - 1)}
+            >
+              -1
+            </button>
           </div>
         </article>
         {/* session section  */}
         <article className="w-60 text-center my-4">
-          <div id="session-label" className="text-2xl">Session Length</div>
+          <div id="session-label" className="text-2xl">
+            Session Length
+          </div>
           <div className="flex justify-between mt-6">
-            <button id="session-increment" className=" bg-green-700 hover:bg-green-800  focus:ring-green-300 ">+1</button>
-            <p id="session-length" className="flex items-center text-2xl">{sessionLength}</p>
-            <button id="session-decrement" className=" bg-yellow-400 hover:bg-yellow-500  focus:ring-yellow-300">-1</button> 
+            <button
+              id="session-increment"
+              className=" bg-green-700 hover:bg-green-800  focus:ring-green-300 "
+              onClick={() => {
+                setSessionLength(sessionLength + 1);
+                setMinutes(sessionLength + 1);
+              }}
+            >
+              +1
+            </button>
+            <p id="session-length" className="flex items-center text-2xl">
+              {sessionLength}
+            </p>
+            <button
+              id="session-decrement"
+              className=" bg-yellow-400 hover:bg-yellow-500  focus:ring-yellow-300"
+              onClick={() => {
+                setSessionLength(sessionLength - 1);
+                setMinutes(sessionLength - 1);
+              }}
+            >
+              -1
+            </button>
           </div>
         </article>
       </section>
-    {/* timer section  */}
+      {/* timer section  */}
       <article className="flex flex-col justify-center my-6 text-center">
-        <div id="timer-label" className="my-4 text-2xl">Session</div>
-        <div id="timer-left" className="text-6xl">{sessionLength}:00</div>
+        <div id="timer-label" className="my-4 text-2xl">
+          Session
+        </div>
+        <div id="timer-left" className="text-6xl">
+          {minutes}:{seconds < 10 ? `0${seconds}` : seconds}
+        </div>
         <div className="flex justify-evenly mt-8">
-          <button id="start_stop" className="bg-blue-700 hover:bg-blue-800  focus:ring-blue-300">Start - stop</button>
-          <button id="reset" className=" bg-purple-700 hover:bg-purple-800  focus:ring-purple-300">reset</button>
+          <button
+            id="start_stop"
+            className="bg-blue-700 hover:bg-blue-800  focus:ring-blue-300"
+            onClick={() => {
+              setClicked(!clicked);
+              if (!clicked) {
+                console.log("time on");
+              } else {
+                console.log("time off");
+                setClicked(false);
+              }
+            }}
+          >
+            Start - stop
+          </button>
+          <button
+            id="reset"
+            className=" bg-purple-700 hover:bg-purple-800  focus:ring-purple-300"
+            onClick={() => {
+              clearInterval(clicked);
+              setClicked(false);
+              setSeconds(0);
+              setBreakLength(5);
+              setMinutes(25);
+            }}
+          >
+            reset
+          </button>
         </div>
       </article>
     </section>
