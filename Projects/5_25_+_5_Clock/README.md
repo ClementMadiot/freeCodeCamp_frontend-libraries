@@ -80,7 +80,7 @@ Fifth project FreeCodeCamp to valid the certification "Front End Development Lib
 
 - User Story #27: The audio element with id="beep" must be 1 second or longer.✅
 
-- User Story #28: The audio element with id of beep must stop playing and be rewound to the beginning when the element with the id of reset is clicked.❌
+- User Story #28: The audio element with id of beep must stop playing and be rewound to the beginning when the element with the id of reset is clicked.✅
 
 
 ## <br /> <a name="tech-stack">🛠 Technology Used</a>

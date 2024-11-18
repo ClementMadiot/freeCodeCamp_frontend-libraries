@@ -20,9 +20,10 @@ function App() {
     setMinutes(25);
     timerLabelRef.current.textContent = "Session";
     console.log("clear");
-    // if (audioEl && audioEl instanceof Node) {
-    //   document.body.removeChild(audioEl);
-    // }
+    if (audioEl && audioEl instanceof Node) {
+      audioEl.pause();
+      audioEl.currentTime = 0;
+    }
   };
 
   const alarm = () => {
