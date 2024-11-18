@@ -9,6 +9,8 @@ function App() {
   const [isBreak, setIsBreak] = useState(false);
   const timerLabelRef = useRef(null);
 
+  let audioEl = document.getElementById("beep");
+
   const clearTimes = () => {
     clearInterval(clicked);
     setClicked(false);
@@ -18,7 +20,27 @@ function App() {
     setMinutes(25);
     timerLabelRef.current.textContent = "Session";
     console.log("clear");
-  }
+    // if (audioEl && audioEl instanceof Node) {
+    //   document.body.removeChild(audioEl);
+    // }
+  };
+
+  const alarm = () => {
+    if (!audioEl) {
+      audioEl = document.createElement("audio");
+      audioEl.setAttribute("id", "beep");
+      audioEl.setAttribute(
+        "src",
+        "https://cdn.freecodecamp.org/testable-projects-fcc/audio/BeepSound.wav"
+      );
+      document.body.appendChild(audioEl);
+    }
+    setTimeout(() => {
+      audioEl.volume = 10 / 100; // Set the volume
+      audioEl.play();
+      console.log("alarm");
+    });
+  };
 
   useEffect(() => {
     if (breakLength < 1) {
@@ -37,11 +59,10 @@ function App() {
 
   useEffect(() => {
     if (clicked) {
-      console.log("time on");
+      // console.log("time on");
       if (timerLabelRef.current.textContent !== "a break has begun") {
         timerLabelRef.current.textContent = "a session has begun";
       }
-
       const timer = setInterval(() => {
         if (seconds > 0) {
           setSeconds(seconds - 1);
@@ -49,24 +70,27 @@ function App() {
           setMinutes(minutes - 1);
           setSeconds(59);
         }
+
         if (!isBreak && minutes === 0 && seconds === 0) {
           timerLabelRef.current.textContent = "a break has begun";
           setIsBreak(!isBreak);
           setMinutes(breakLength);
+          alarm();
         } else if (isBreak && minutes === 0 && seconds === 0) {
           timerLabelRef.current.textContent = "a session has begun";
           setMinutes(sessionLength);
           setIsBreak(!isBreak);
+          alarm();
         }
       }, 1000);
       return () => clearInterval(timer);
     }
-    console.log("time off");
+    // console.log("time off");
     setClicked(false);
-  }, [clicked, seconds, minutes, isBreak, breakLength, sessionLength]);
+  }, [clicked, seconds, minutes, isBreak, breakLength, sessionLength, alarm]);
 
   return (
-    <section className="flex justify-center flex-col">
+    <section id="section" className="flex justify-center flex-col">
       <h1 className="text-5xl my-6 mx-auto ">25 + 5 Clock</h1>
 
       <section className="flex justify-evenly mt-6">
