@@ -21,10 +21,10 @@ Later, I'll build a shopping cart and other applications to learn how to create 
 
 ## <br /> <a name="projects">🌐 Projects</a>
 - [x] [1_Random_Quotes](./Projects/1_Random_Quotes)
-- [x] [2_Markdown_Previewer](./Projects/markdown_previewer)
-- [] [3_Drum_Machine](./Projects/3_Drum_Machine)
-- [] [4_Calculator](./Projects/4_Calculator)
-- [] [5_25_+_5_Clock](./Projects/5_25_+_5_Clock)
+- [x] [2_Markdown_Previewer](./Projects/2_Markdown_Previewer)
+- [x] [3_Drum_Machine](./Projects/3_Drum_Machine)
+- [x] [4_Calculator](./Projects/4_Calculator)
+- [x] [5_25_+_5_Clock](./Projects/5_25_+_5_Clock)
 
 ## <br /> <a name="courses">📚 Courses</a>
 
