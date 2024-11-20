@@ -1,14 +1,14 @@
 <div align="center" class="container">
-<h3  align="center">FreeCodeCamp React</h3>
-<picture>
-  <img alt="FreeCodeCamp" src="https://cdn.freecodecamp.org/platform/universal/fcc_primary.svg">
-</picture>
+<div align="center">
+  <img alt="Certification" src="./public/certification.JPG">
+</div>
+<h3  align="center">Front End Development Libraries</h3>
 </div>
 
 ## <br /> 📋 <a name="table">Summary</a>
 
 - ✨ [Introduction](#introduction)
-- 🌐 [Projects](#projects)
+- 🎓 [Projects](#projects)
 - 📚 [Courses](#courses)
 
 ## <br /> <a name="introduction">✨ Introduction</a>
@@ -19,7 +19,7 @@ In the Front End Development Libraries Certification, you'll learn how to style 
 
 Later, I'll build a shopping cart and other applications to learn how to create powerful Single Page Applications (SPAs) with React and Redux.
 
-## <br /> <a name="projects">🌐 Projects</a>
+## <br /> <a name="projects">🎓 Projects</a>
 - [x] [1_Random_Quotes](./Projects/1_Random_Quotes)
 - [x] [2_Markdown_Previewer](./Projects/2_Markdown_Previewer)
 - [x] [3_Drum_Machine](./Projects/3_Drum_Machine)
